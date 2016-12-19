@@ -1,0 +1,8 @@
+<h1>YouTube Search</h1>
+    <input [formControl]="search">
+    <div *ngFor="let video of results | async">
+      <h3>{{video.snippet.title}}</h3>
+      <img [src]="video.snippet.thumbnails.default.url"/>
+    </div>
+
+
