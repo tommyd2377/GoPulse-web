@@ -32,9 +32,9 @@ constructor(private af: AngularFire, private Auth: FirebaseAuth,
             .map(params => params['id'])
             .subscribe((id) => {
                 this.youtube.getVideo(id)
-                    .subscribe(video => {
-                        this.video = video;
-                        console.log(id)
+                   .subscribe(video => {
+                      this.video = video;
+                       console.log(id)
                     })
             })
           }  

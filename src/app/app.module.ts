@@ -26,10 +26,10 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
-  { path: 'app-sign-up', component: SignUpComponent },
-  { path: 'app-home', component: HomeComponent },
+  { path: 'signup', component: SignUpComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'videos/:id', component: VideoDetailComponent },
-  { path: 'app-video-search', component: VideoSearchComponent },
+  { path: 'videosearch', component: VideoSearchComponent },
 ];
 
 @NgModule({

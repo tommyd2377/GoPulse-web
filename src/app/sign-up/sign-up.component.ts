@@ -14,7 +14,7 @@ import {FIREBASE_PROVIDERS,
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-sign-up',
+  selector: 'signup',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })

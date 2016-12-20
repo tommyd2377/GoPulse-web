@@ -9,7 +9,7 @@ import {defaultFirebase,
   FirebaseAuth} from 'angularfire2';
 
 @Component({
-  selector: 'app-home',
+  selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

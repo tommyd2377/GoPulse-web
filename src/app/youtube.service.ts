@@ -19,7 +19,7 @@ export class YoutubeService {
   }
 
   getVideo(id:string){
-    return this.http.get(`${BASE_URL}videos?id=${id}&part=snippet&key=${API_TOKEN}`)
+    return this.http.get(`${BASE_URL}videos?id=${id}&part=snippet&type=video&key=${API_TOKEN}`)
             .map(res => res.json());
     }
 }

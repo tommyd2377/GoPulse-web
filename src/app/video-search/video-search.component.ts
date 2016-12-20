@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 
 @Component({
-  selector: 'app-video-search',
+  selector: 'videosearch',
   templateUrl: './video-search.component.html',
   styleUrls: ['./video-search.component.css'],
   providers:[YoutubeService]
