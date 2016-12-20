@@ -13,6 +13,7 @@ import { YoutubeService } from './youtube.service'
 import { SearchComponent } from './search/search.component';
 import { UsersearchComponent } from './usersearch/usersearch.component';
 import { LoginComponent } from './login/login.component';
+import { MaterialModule } from '@angular/material';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
@@ -27,6 +28,7 @@ export const firebaseConfig = {
 
 const appRoutes: Routes = [
   { path: 'signup', component: SignUpComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'videos/:id', component: VideoDetailComponent },
   { path: 'videosearch', component: VideoSearchComponent },
@@ -49,7 +51,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    MaterialModule.forRoot()
   ],
   providers: [YoutubeService],
   bootstrap: [AppComponent]

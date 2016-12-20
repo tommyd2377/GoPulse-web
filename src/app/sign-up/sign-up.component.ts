@@ -12,6 +12,7 @@ import {FIREBASE_PROVIDERS,
   AuthProviders,
   firebaseAuthConfig} from 'angularfire2';
 import { FormsModule } from '@angular/forms';
+import { MaterialModule } from '@angular/material';
 
 @Component({
   selector: 'signup',

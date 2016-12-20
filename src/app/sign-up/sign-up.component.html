@@ -1,16 +1,12 @@
-<br>
-<form>
-  <br>
- <input id="txtUsername" [(ngModel)]="displayName" type="text" name="name" placeholder="username">
+<div class="grey">
+  <md-input id="txtUsername" [(ngModel)]="displayName" type="text" name="name" placeholder="username"></md-input>
   <br>
   <br>
-  <input id="txtEmail" [(ngModel)]="email" type="email" name="email" placeholder="email">
+  <md-input id="txtEmail" [(ngModel)]="email" type="email" name="email" placeholder="email"></md-input>
   <br>
   <br>
-  <input id="txtPassword" [(ngModel)]="password" type="password" name="password" placeholder="password">
+  <md-input id="txtPassword" [(ngModel)]="password" type="password" name="password" placeholder="password"></md-input>
   <br>
   <br>
-  <button id="btnSignUp" (click)="createUser()" type="button" name="signup">Sign Up</button>
-</form>
-<br>
-<br>
+  <button class="button" md-raised-button id="btnSignUp" (click)="createUser()" type="button" name="signup">Sign Up</button>
+</div>

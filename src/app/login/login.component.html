@@ -1,3 +1,11 @@
-<p>
-  login works!
-</p>
+<p>Please enter you GoPulse account information</p>
+  <md-input id="email" [(ngModel)]="data.email" name="email" type="email" placeholder="email" align="left"></md-input>
+  <br>
+  <br>
+  <md-input id="password" [(ngModel)]="data.password" name="password" type="password" placeholder="password" align="left"></md-input>
+  <br>
+  <br>
+  <button class="button" md-raised-button (click)="login()">Login</button>
+  <br>
+  <br>
+  <button class="button" md-raised-button (click)="logout()">Logout</button>
