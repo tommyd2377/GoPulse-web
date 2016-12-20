@@ -35,7 +35,7 @@ export class SignUpComponent {
         itemObservable.set({ displayName: (this.displayName), email: (this.email)});
         console.log(user)
         console.log("user created")
-        this.router.navigate(['/app-home']); 
+        this.router.navigate(['/home']); 
       } 
       else {
         console.log("no user")
