@@ -31,7 +31,11 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'videos/:id', component: VideoDetailComponent },
-  { path: 'videosearch', component: VideoSearchComponent },
+  { path: 'search', component: SearchComponent,
+    children: [
+    {path: 'videosearch', component: VideoSearchComponent},
+    {path: 'usersearch', component: UsersearchComponent}
+    ] },
 ];
 
 @NgModule({
