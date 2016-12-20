@@ -34,6 +34,7 @@ constructor(private af: AngularFire, private Auth: FirebaseAuth,
                 this.youtube.getVideo(id)
                     .subscribe(video => {
                         this.video = video;
+                        console.log(id)
                     })
             })
           }  
@@ -45,7 +46,7 @@ constructor(private af: AngularFire, private Auth: FirebaseAuth,
         var uid = user.uid;
         console.log(uid)
         const twothumbsups = this.af.database.list('user-data/'+uidTwoThumbsUp)
-        twothumbsups.push({ uid: (uid), vid: "vid" });
+        twothumbsups.push({ uid: (uid), vid: (uid) });
       } 
       else {
         console.log("no user")
