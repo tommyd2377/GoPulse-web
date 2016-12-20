@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FIREBASE_PROVIDERS,
-  defaultFirebase,
+import {defaultFirebase,
   AngularFire,
   AuthMethods,
   AuthProviders,
@@ -8,18 +7,37 @@ import {FIREBASE_PROVIDERS,
   FirebaseObjectObservable, 
   FirebaseListObservable, 
   FirebaseAuth} from 'angularfire2';
+import { YoutubeService } from '../youtube.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
-  selector: 'app-video-detail',
+  selector: 'videos',
   templateUrl: './video-detail.component.html',
   styleUrls: ['./video-detail.component.css']
 })
-export class VideoDetailComponent {
 
-  twothumbsups: FirebaseListObservable<any[]>;
-  
-  constructor(private af: AngularFire, private Auth: FirebaseAuth) {}
-  
+export class VideoDetailComponent implements OnInit{
+
+twothumbsups: FirebaseListObservable<any[]>;
+video;
+id: string;
+
+constructor(private af: AngularFire, private Auth: FirebaseAuth, 
+    public youtube: YoutubeService, private route: ActivatedRoute,
+    private router: Router) {}
+
+  ngOnInit() {
+    this.route.params
+            .map(params => params['id'])
+            .subscribe((id) => {
+                this.youtube.getVideo(id)
+                    .subscribe(video => {
+                        this.video = video;
+                    })
+            })
+          }  
+
   twoThumbsUp() { 
     this.af.auth.subscribe( (user) => {
       if (user) {

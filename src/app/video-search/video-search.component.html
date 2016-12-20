@@ -3,6 +3,7 @@
     <div *ngFor="let video of results | async">
       <h3>{{video.snippet.title}}</h3>
       <img [src]="video.snippet.thumbnails.default.url"/>
+      <button routerLink= "/videos/{{video.id.videoId}}">{{video.id.videoId}}</button>
     </div>
 
 

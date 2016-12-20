@@ -10,6 +10,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
 import { VideoSearchComponent } from './video-search/video-search.component';
 import { YoutubeService } from './youtube.service'
+import { SearchComponent } from './search/search.component';
+import { UsersearchComponent } from './usersearch/usersearch.component';
+import { LoginComponent } from './login/login.component';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
@@ -25,7 +28,7 @@ export const firebaseConfig = {
 const appRoutes: Routes = [
   { path: 'app-sign-up', component: SignUpComponent },
   { path: 'app-home', component: HomeComponent },
-  { path: 'app-video-detail', component: VideoDetailComponent },
+  { path: 'videos/:id', component: VideoDetailComponent },
   { path: 'app-video-search', component: VideoSearchComponent },
 ];
 
@@ -35,7 +38,10 @@ const appRoutes: Routes = [
     SignUpComponent,
     HomeComponent,
     VideoDetailComponent,
-    VideoSearchComponent
+    VideoSearchComponent,
+    SearchComponent,
+    UsersearchComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
