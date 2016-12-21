@@ -21,7 +21,6 @@ export class VideoDetailComponent implements OnInit{
 
 twothumbsups: FirebaseListObservable<any[]>;
 video;
-vid: string = "";
 
 constructor(private af: AngularFire, private Auth: FirebaseAuth, 
     public youtube: YoutubeService, private route: ActivatedRoute,
@@ -30,33 +29,37 @@ constructor(private af: AngularFire, private Auth: FirebaseAuth,
 ngOnInit() {
     this.route.params
             .map(params => params['id'])
-            .subscribe((id) => {
+                .subscribe((id) => {
                 this.youtube.getVideo(id)
                    .subscribe(video => {
                       this.video = video;
                        console.log(id)   
                     })
-            })
+            })    
 }  
 
 getId() {
   this.route.params
             .map(params => params['id'])
-            .subscribe((id) => {
-              var vid = id;
-              console.log(vid)
-            })
+                .subscribe((id) => {
+                this.youtube.getVideo(id)
+                   .subscribe(video => {
+                      this.video = video;
+                       console.log(id)   
+                    })
+            })    
 }
 
 twoThumbsUp() { 
     this.af.auth.subscribe( (user) => {
       if (user) {
+        var vid = this.getId();
         var uidTwoThumbsUp = user.uid+"-twothumbsup";
         var uid = user.uid;
         console.log(uid)
         console.log(this.getId)
         const twothumbsups = this.af.database.list('user-data/'+uidTwoThumbsUp)
-        twothumbsups.push({ uid: (uid), vid: (uid) });
+        twothumbsups.push({ uid: (uid), vid: "vid" });
       } 
       else {
         console.log("no user")
