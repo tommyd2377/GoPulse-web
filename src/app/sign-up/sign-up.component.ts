@@ -43,4 +43,8 @@ export class SignUpComponent {
       }
     });
   }
+
+  welcomeScreen() {
+    this.router.navigate(['/welcomescreen']); 
+  }
 }

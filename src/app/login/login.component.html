@@ -1,8 +1,9 @@
+<button md-raised-button (click)="welcomeScreen()">Back</button>
 <p>Please enter you GoPulse account information</p>
-  <md-input id="email" [(ngModel)]="data.email" name="email" type="email" placeholder="email" align="left"></md-input>
+   <md-input id="txtEmail" [(ngModel)]="email" type="email" name="email" placeholder="email"></md-input>
   <br>
   <br>
-  <md-input id="password" [(ngModel)]="data.password" name="password" type="password" placeholder="password" align="left"></md-input>
+  <md-input id="txtPassword" [(ngModel)]="password" type="password" name="password" placeholder="password"></md-input>
   <br>
   <br>
   <button class="button" md-raised-button (click)="login()">Login</button>

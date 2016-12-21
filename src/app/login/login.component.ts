@@ -20,19 +20,23 @@ import { MaterialModule } from '@angular/material';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  data = {};
+  email;
+  password;
 
-  constructor(public af: AngularFire, public router: Router) { }
+  constructor(public af: AngularFire, private router: Router) {}
 
   login() {
-    this.af.auth.login(this.data)
-    console.log(this.data)
+    this.af.auth.login({ email: (this.email), password: (this.password)},
+    {provider: AuthProviders.Password, method: AuthMethods.Password})
     this.router.navigate(['/home']);
   }
 
   logout() {
     this.af.auth.logout
-    console.log(this.data)
+  }
+
+  welcomeScreen() {
+    this.router.navigate(['/welcomescreen'])
   }
 
 }

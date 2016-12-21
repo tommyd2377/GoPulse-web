@@ -14,6 +14,11 @@ import { SearchComponent } from './search/search.component';
 import { UsersearchComponent } from './usersearch/usersearch.component';
 import { LoginComponent } from './login/login.component';
 import { MaterialModule } from '@angular/material';
+import { WelcomescreenComponent } from './welcomescreen/welcomescreen.component';
+import { ProfileComponent } from './profile/profile.component';
+import { FollowersComponent } from './followers/followers.component';
+import { FolloweesComponent } from './followees/followees.component';
+import { UsersComponent } from './users/users.component';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
@@ -27,16 +32,18 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
-  { path: 'signup', component: SignUpComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'videos/:id', component: VideoDetailComponent },
   { path: 'search', component: SearchComponent,
     children: [
     {path: 'videosearch', component: VideoSearchComponent},
     {path: 'usersearch', component: UsersearchComponent}
-    ] },
-];
+    ]},
+  { path: 'welcomescreen', component: WelcomescreenComponent },
+  { path: 'signup', component: SignUpComponent },
+  { path: 'login', component: LoginComponent },
+  ];
+  
 
 @NgModule({
   declarations: [
@@ -47,7 +54,12 @@ const appRoutes: Routes = [
     VideoSearchComponent,
     SearchComponent,
     UsersearchComponent,
-    LoginComponent
+    LoginComponent,
+    WelcomescreenComponent,
+    ProfileComponent,
+    FollowersComponent,
+    FolloweesComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
