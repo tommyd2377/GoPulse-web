@@ -15,24 +15,15 @@ import { RouterModule,
   RouterStateSnapshot } from '@angular/router';
 
 @Component({
-  selector: 'profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'popular',
+  templateUrl: './popular.component.html',
+  styleUrls: ['./popular.component.css']
 })
-export class ProfileComponent implements OnInit {
-  
-  constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router) {}
+export class PopularComponent implements OnInit {
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
-    this.af.auth.subscribe( (user) => {
-      if (user) {
-      var uid = user.uid;
-      console.log(uid)
-      } 
-      else {
-      console.log("no user")
-      }
-    });
   }
 
   scrollTop() {

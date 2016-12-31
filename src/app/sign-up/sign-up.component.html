@@ -1,14 +1,17 @@
+<header class="header">
+  <br>
+  <a class="backbutton" (click)="welcomeScreen()">Back</a>
+  <br>
+  <br>
+</header>
 <div class="grey">
-  <button md-raised-button (click)="welcomeScreen()">Back</button>
+  <md-input class="inputs" id="txtUsername" [(ngModel)]="displayName" type="text" name="name" placeholder="username"></md-input>
   <br>
   <br>
-  <md-input id="txtUsername" [(ngModel)]="displayName" type="text" name="name" placeholder="username"></md-input>
+  <md-input class="inputs" id="txtEmail" [(ngModel)]="email" type="email" name="email" placeholder="email"></md-input>
   <br>
   <br>
-  <md-input id="txtEmail" [(ngModel)]="email" type="email" name="email" placeholder="email"></md-input>
-  <br>
-  <br>
-  <md-input id="txtPassword" [(ngModel)]="password" type="password" name="password" placeholder="password"></md-input>
+  <md-input class="inputs" id="txtPassword" [(ngModel)]="password" type="password" name="password" placeholder="password"></md-input>
   <br>
   <br>
   <button class="button" md-raised-button id="btnSignUp" (click)="createUser()" type="button" name="signup">Sign Up</button>

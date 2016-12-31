@@ -19,9 +19,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { FollowersComponent } from './followers/followers.component';
 import { FolloweesComponent } from './followees/followees.component';
 import { UsersComponent } from './users/users.component';
+import { PopularComponent } from './popular/popular.component';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
+import { SettingsComponent } from './settings/settings.component';
 
 export const firebaseConfig = {
  apiKey: "AIzaSyAJNsnnVl8HfbViTs5qCNGHs2AzN2BKSTE",
@@ -42,6 +44,11 @@ const appRoutes: Routes = [
   { path: 'welcomescreen', component: WelcomescreenComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'profile', component: ProfileComponent,
+    children: [
+      {path: 'settings', component: SettingsComponent}
+    ]},
+  { path: 'popular', component: PopularComponent}
   ];
   
 
@@ -59,7 +66,9 @@ const appRoutes: Routes = [
     ProfileComponent,
     FollowersComponent,
     FolloweesComponent,
-    UsersComponent
+    UsersComponent,
+    PopularComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

@@ -7,3 +7,24 @@
     background-color: grey;
     text-align: center
 }
+
+.header {
+    background-color: lawngreen;
+}
+
+.backbutton {
+    text-align: right;
+    background-color: lawngreen;
+}
+
+.inputs {
+    color: white;
+}
+
+body {
+    background-color: grey;
+}
+
+* {
+    background-color: grey;
+}

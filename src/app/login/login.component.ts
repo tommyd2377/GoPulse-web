@@ -5,8 +5,7 @@ import { RouterModule,
   Router, 
   ActivatedRouteSnapshot, 
   RouterStateSnapshot } from '@angular/router';
-import {FIREBASE_PROVIDERS,
-  defaultFirebase,
+import { defaultFirebase,
   AngularFire,
   AuthMethods,
   AuthProviders,
@@ -29,10 +28,6 @@ export class LoginComponent {
     this.af.auth.login({ email: (this.email), password: (this.password)},
     {provider: AuthProviders.Password, method: AuthMethods.Password})
     this.router.navigate(['/home']);
-  }
-
-  logout() {
-    this.af.auth.logout
   }
 
   welcomeScreen() {

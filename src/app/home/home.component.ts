@@ -7,6 +7,12 @@ import {defaultFirebase,
   FirebaseObjectObservable, 
   FirebaseListObservable, 
   FirebaseAuth} from 'angularfire2';
+import { RouterModule, 
+  Routes, 
+  CanActivate, 
+  Router, 
+  ActivatedRouteSnapshot, 
+  RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'home',
@@ -18,7 +24,7 @@ export class HomeComponent implements OnInit {
   
   twothumbsups: FirebaseListObservable<any[]>;
   
-  constructor(private af: AngularFire, private Auth: FirebaseAuth) {}
+  constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router) {}
 
   ngOnInit() {
     this.af.auth.subscribe( (user) => {
@@ -33,6 +39,27 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  scrollTop() {
+    window.scrollTo(0, 0);
+  }
+
+  home() {
+    this.router.navigate(['/home'])
+  }
+
+  pulse() {
+    this.router.navigate(['/popular'])
+  }
+
+  search() {
+    this.router.navigate(['/search'])
+  }
+
+  profile() {
+    this.router.navigate(['/profile'])
+  }
+
 }
 
 

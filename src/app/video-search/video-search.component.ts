@@ -15,16 +15,19 @@ import 'rxjs/Rx';
 })
 
 export class VideoSearchComponent {
-
+    
     search = new FormControl;
     results: Observable<any>;
-  
+
     constructor(public youtube:YoutubeService, private router: Router) {
-        this.results = 
-        this.search.valueChanges
+
+    this.results = 
+       this.search.valueChanges
         .debounceTime(200)
-        .switchMap(query => youtube.search(query));
+       .switchMap(query => youtube.search(query));
+        }
     }
-}
+    
+
 
 
