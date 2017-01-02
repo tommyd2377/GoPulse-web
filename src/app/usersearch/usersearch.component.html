@@ -1,7 +1,2 @@
 <br>
-<md-input type="text" name="usersearch" [(ngModel)]="usersearch" placeholder="search for users"></md-input>
-<ul>
-    <li *ngFor="let user of users | async">
-      {{ users.displayName }}
-    </li>
-  </ul>
+<md-input type="text" name="usersearch" (keyup)="search()" [(ngModel)]="usersearch" placeholder="search for users"></md-input>

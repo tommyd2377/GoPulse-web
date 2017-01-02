@@ -20,10 +20,11 @@ import { FollowersComponent } from './followers/followers.component';
 import { FolloweesComponent } from './followees/followees.component';
 import { UsersComponent } from './users/users.component';
 import { PopularComponent } from './popular/popular.component';
+import { SettingsComponent } from './settings/settings.component';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
-import { SettingsComponent } from './settings/settings.component';
+
 
 export const firebaseConfig = {
  apiKey: "AIzaSyAJNsnnVl8HfbViTs5qCNGHs2AzN2BKSTE",

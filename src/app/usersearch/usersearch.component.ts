@@ -10,16 +10,8 @@ import { Subject } from 'rxjs/Subject';
 })
 export class UsersearchComponent {
   usersearch: String;
-  users: FirebaseListObservable<any[]>;
 
-constructor(af: AngularFire) {
-
-    this.users = af.database.list('/user-data', {
-      query: {
-        orderByChild: 'displayName',
-        equalTo: this.usersearch
-      }
-    });
+  search() {
     console.log(this.usersearch)
   }
 }
