@@ -5,7 +5,7 @@
   <br>
 </header>
 <div class="grey">
-  <md-input class="inputs" id="txtUsername" [(ngModel)]="displayName" type="text" name="name" placeholder="username"></md-input>
+  <md-input class="inputs" id="displayName" [(ngModel)]="displayName" type="text" name="displayName" placeholder="username"></md-input>
   <br>
   <br>
   <md-input class="inputs" id="txtEmail" [(ngModel)]="email" type="email" name="email" placeholder="email"></md-input>
@@ -15,4 +15,7 @@
   <br>
   <br>
   <button class="button" md-raised-button id="btnSignUp" (click)="createUser()" type="button" name="signup">Sign Up</button>
+  <br>
+  <br>
+  <button (click)="twitter()">Login With Twitter</button>
 </div>

@@ -22,20 +22,27 @@ import { RouterModule,
 
 export class HomeComponent implements OnInit {
   
+  //set twothumbsup property as FirebaseListObservable
   twothumbsups: FirebaseListObservable<any[]>;
   
+  //pass AngularFire, FirebaseAuth, and Router via direct injection
   constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router) {}
 
   ngOnInit() {
+    //retrieve user credentials
     this.af.auth.subscribe( (user) => {
       if (user) {
+      //set database extension
       var uidTwoThumbsUp = user.uid+"-twothumbsup";
       var uid = user.uid;
       console.log(uid)
+      //set data retrieval path
       this.twothumbsups = this.af.database.list('user-data/'+uidTwoThumbsUp);
       } 
       else {
+      //no user, route to welcome screen
       console.log("no user")
+      this.router.navigate(['/welcomescreen'])
       }
     });
   }
@@ -44,6 +51,7 @@ export class HomeComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
+  //set navigation router paths
   home() {
     this.router.navigate(['/home'])
   }

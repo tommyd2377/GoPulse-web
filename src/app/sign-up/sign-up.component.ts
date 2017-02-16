@@ -5,12 +5,13 @@ import { RouterModule,
   Router, 
   ActivatedRouteSnapshot, 
   RouterStateSnapshot } from '@angular/router';
-import {FIREBASE_PROVIDERS,
-  defaultFirebase,
+import {defaultFirebase,
   AngularFire,
   AuthMethods,
   AuthProviders,
-  firebaseAuthConfig} from 'angularfire2';
+  firebaseAuthConfig,
+  FirebaseAuth,
+  FirebaseAuthState} from 'angularfire2';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 
@@ -21,29 +22,36 @@ import { MaterialModule } from '@angular/material';
 })
 export class SignUpComponent {
 
+  //set user input properties
   email;
   password;
   displayName;
+  authState: FirebaseAuthState;
  
-  constructor(private af: AngularFire, private router: Router) {}
+  constructor(private af: AngularFire, private auth: FirebaseAuth, private router: Router) {}
   
   createUser() {
+    //create user with firebase auth method
     this.af.auth.createUser({ email: (this.email), password: (this.password)})
+    //subscribe and retrieve user credentials
     this.af.auth.subscribe( (user) => {
       if (user) {
         var uid = user.uid;
         const itemObservable = this.af.database.object('user-data/' + uid );
+        //create user record in firebase database
         itemObservable.set({ displayName: (this.displayName), email: (this.email)});
-        console.log(user)
-        console.log("user created")
+        console.log(user + "created")
+        //route new user to home screen
         this.router.navigate(['/home']); 
       } 
       else {
         console.log("no user")
+        this.router.navigate(['/welcomescreen']);
       }
     });
   }
 
+  //route user back to welcomescreen
   welcomeScreen() {
     this.router.navigate(['/welcomescreen']); 
   }

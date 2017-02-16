@@ -9,7 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
 import { VideoSearchComponent } from './video-search/video-search.component';
-import { YoutubeService } from './youtube.service'
+import { YoutubeService } from './youtube.service';
+import { UserService } from './user.service'
 import { SearchComponent } from './search/search.component';
 import { UsersearchComponent } from './usersearch/usersearch.component';
 import { LoginComponent } from './login/login.component';
@@ -25,7 +26,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 
-
+//connect project to firebase
 export const firebaseConfig = {
  apiKey: "AIzaSyAJNsnnVl8HfbViTs5qCNGHs2AzN2BKSTE",
     authDomain: "gopulse-acf2b.firebaseapp.com",
@@ -34,25 +35,26 @@ export const firebaseConfig = {
     messagingSenderId: "604663955164"
 };
 
+//create application routes
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'videos/:id', component: VideoDetailComponent },
-  { path: 'search', component: SearchComponent,
-    children: [
-    {path: 'videosearch', component: VideoSearchComponent},
-    {path: 'usersearch', component: UsersearchComponent}
-    ]},
+  { path: 'user/:id', component: UsersComponent },
+  { path: 'popular', component: PopularComponent},
   { path: 'welcomescreen', component: WelcomescreenComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'search', component: SearchComponent,
+    children: [
+      {path: 'videosearch', component: VideoSearchComponent},
+      {path: 'usersearch', component: UsersearchComponent}
+    ]},
   { path: 'profile', component: ProfileComponent,
     children: [
       {path: 'settings', component: SettingsComponent}
     ]},
-  { path: 'popular', component: PopularComponent}
-  ];
+];
   
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +82,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MaterialModule.forRoot()
   ],
-  providers: [YoutubeService],
+  providers: [YoutubeService, UserService],
   bootstrap: [AppComponent]
 })
 
