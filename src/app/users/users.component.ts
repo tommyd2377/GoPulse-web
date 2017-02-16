@@ -16,22 +16,23 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
+
 export class UsersComponent implements OnInit {
 
   displayName;
 
-  constructor(private af: AngularFire, private Auth: FirebaseAuth, private route: ActivatedRoute,
-      private router: Router, private users: UserService) { }
+  constructor(private af: AngularFire, private Auth: FirebaseAuth, 
+    private route: ActivatedRoute, private router: Router, private users: UserService) { }
 
-ngOnInit() {
-   this.route.params
-              .map(params => params['id'])
-                  .subscribe((id) => {
-                  this.users.getOthertUserName(id)
-                    .subscribe(user => {
-                          this.displayName = user;
-                          console.log(user)
-                      })
-                  }) 
-}
+  ngOnInit() {
+    this.route.params
+                .map(params => params['id'])
+                    .subscribe((id) => {
+                    this.users.getOthertUserName(id)
+                      .subscribe(user => {
+                            this.displayName = user;
+                            console.log(user)
+                        })
+                    }) 
+  }
 }

@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './followers.component.html',
   styleUrls: ['./followers.component.css']
 })
+
 export class FollowersComponent implements OnInit {
 
   constructor() { }

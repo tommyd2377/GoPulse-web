@@ -1,6 +1,6 @@
     <br>
-    <md-input [(ngModel)]="userquery" (keyup) = "userSearch()" id = "userquery" name = "userquery" placeholder="search for users"></md-input>
+    <md-input [(ngModel)]="userquery" (keyup)="userSearch()" id="userquery" name="userquery" placeholder="search for users"></md-input>
     <div *ngFor="let user of users | async">
       <h3>{{user.displayName}}</h3>
-        <button routerLink= "/user/{{user.uid}}">{{user.uid}}</button>
+        <button routerLink= "/user/{{user.uid}}">{{user.displayName}}</button>
     </div>

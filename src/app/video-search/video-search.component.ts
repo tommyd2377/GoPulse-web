@@ -29,7 +29,7 @@ export class VideoSearchComponent {
        this.search.valueChanges
         .debounceTime(200)
         .switchMap(query => youtube.search(query));
-        }
+    }
 }
     
 

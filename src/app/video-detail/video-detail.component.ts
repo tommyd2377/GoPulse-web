@@ -40,7 +40,7 @@ export class VideoDetailComponent implements OnInit{
                         ("https://www.youtube.com/embed/"+this.id+"?autoplay=1");
                     })
                   }) 
-      }
+  }
     
   ngOnInit() {
       this.route.params

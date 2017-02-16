@@ -19,6 +19,7 @@ import { RouterModule,
   templateUrl: './popular.component.html',
   styleUrls: ['./popular.component.css']
 })
+
 export class PopularComponent implements OnInit {
 
   constructor(private router: Router) { }

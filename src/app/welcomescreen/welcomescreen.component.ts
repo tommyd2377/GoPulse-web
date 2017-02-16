@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import { RouterModule, 
   Routes, 
-  CanActivate, 
+  CanActivate,
   Router, 
   ActivatedRouteSnapshot, 
   RouterStateSnapshot } from '@angular/router';
@@ -12,6 +12,7 @@ import { RouterModule,
   templateUrl: './welcomescreen.component.html',
   styleUrls: ['./welcomescreen.component.css']
 })
+
 export class WelcomescreenComponent {
 
   constructor(public router: Router) {}

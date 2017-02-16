@@ -19,6 +19,7 @@ import { RouterModule,
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent implements OnInit {
   
   constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router) {}
