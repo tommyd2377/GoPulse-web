@@ -20,13 +20,13 @@ import { MaterialModule } from '@angular/material';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
+
 export class SignUpComponent {
 
   //set user input properties
   email;
   password;
   displayName;
-  authState: FirebaseAuthState;
  
   constructor(private af: AngularFire, private auth: FirebaseAuth, private router: Router) {}
   
