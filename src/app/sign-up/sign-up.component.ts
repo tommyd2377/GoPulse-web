@@ -37,9 +37,9 @@ export class SignUpComponent {
     this.af.auth.subscribe( (user) => {
       if (user) {
         var uid = user.uid;
-        const itemObservable = this.af.database.object('user-data/' + uid );
+        const user_data_db = this.af.database.object('user-data/' + uid );
         //create user record in firebase database
-        itemObservable.set({ displayName: (this.displayName), email: (this.email)});
+        user_data_db.set({ displayName: (this.displayName), email: (this.email)});
         console.log(user + "created")
         //route new user to home screen
         this.router.navigate(['/home']); 
