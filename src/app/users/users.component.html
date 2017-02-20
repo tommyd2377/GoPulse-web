@@ -1,4 +1,6 @@
 <h1>Profile</h1>
 <p>
-  {{ displayName }}
+  {{ displayName | json }}
 </p>
+<button (click)="follow()">Follow</button>
+

@@ -16,15 +16,11 @@ import 'rxjs/Rx';
 
 export class VideoSearchComponent {
     
-    //new search via angular FormControl
     search = new FormControl;
-    //create Observable for results
     results: Observable<any>;
 
-    //pass in youtube service and angular router via direct injection
     constructor(public youtube:YoutubeService, private router: Router) {
 
-    //fetch results from YoutubeService search function
     this.results = 
        this.search.valueChanges
         .debounceTime(200)

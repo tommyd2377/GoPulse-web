@@ -20,19 +20,14 @@ import { RouterModule,
   styleUrls: ['./search.component.css']
 })
 
-export class SearchComponent implements OnInit {
+export class SearchComponent {
 
-  //pass in Router via direct injection
   constructor(private router: Router) { }
-
-  ngOnInit() {
-  }
 
   scrollTop() {
     window.scrollTo(0, 0);
   }
 
-  //set navigation router paths
   home() {
     this.router.navigate(['/home'])
   }

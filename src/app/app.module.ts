@@ -26,7 +26,6 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 
-//connect project to firebase
 export const firebaseConfig = {
  apiKey: "AIzaSyAJNsnnVl8HfbViTs5qCNGHs2AzN2BKSTE",
     authDomain: "gopulse-acf2b.firebaseapp.com",
@@ -35,7 +34,6 @@ export const firebaseConfig = {
     messagingSenderId: "604663955164"
 };
 
-//create application routes
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'videos/:id', component: VideoDetailComponent },

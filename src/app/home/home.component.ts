@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MaterialModule } from '@angular/material';
 import {defaultFirebase,
   AngularFire,
   AuthMethods,
@@ -22,27 +23,26 @@ import { RouterModule,
 
 export class HomeComponent implements OnInit {
   
-  //set twothumbsup property as FirebaseListObservable
-  twothumbsups: FirebaseListObservable<any[]>;
+  votes: FirebaseListObservable<any>;
   
-  //pass AngularFire, FirebaseAuth, and Router via direct injection
   constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router) {}
 
+  //TODO: retrieve data from posts, following activty, dms
+  //TODO: combine latest fom votes, posts, and following activty
+  //TODO: post dms at top
+  
   ngOnInit() {
-    //retrieve user credentials
     this.af.auth.subscribe( (user) => {
       if (user) {
-      //set database extension
-      var uidTwoThumbsUp = user.uid+"-twothumbsup";
-      var uid = user.uid;
-      console.log(uid)
-      //set data retrieval path
-      this.twothumbsups = this.af.database.list('user-data/'+uidTwoThumbsUp);
+        var uid_votes = user.uid+"-votes";
+        var uid = user.uid;
+        console.log(uid)
+        this.votes = this.af.database.list('user-data/'+uid_votes)
+          .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
       } 
       else {
-      //no user, route to welcome screen
-      console.log("no user")
-      this.router.navigate(['/welcomescreen'])
+        console.log("no user")
+        this.router.navigate(['/welcomescreen'])
       }
     });
   }
@@ -51,7 +51,6 @@ export class HomeComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
-  //set navigation router paths
   home() {
     this.router.navigate(['/home'])
   }

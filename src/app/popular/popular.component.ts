@@ -24,6 +24,9 @@ export class PopularComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  //TODO: return video-data
+  //TODO: rank and display videos by list size at video-data/id/-votes
+
   ngOnInit() {
   }
 

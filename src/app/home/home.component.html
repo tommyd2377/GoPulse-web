@@ -15,6 +15,13 @@
       </div>
     </div>
 <h1>Activity</h1>
-<li *ngFor="let twothumbsup of twothumbsups | async">
- <span>{{twothumbsup.uid}} gave {{twothumbsup.vid}} two thumbs up</span>
-</li>
+<md-card *ngFor="let vote of votes | async">
+    <a href="/user/{{vote.uid}}"><span>{{vote.username}}</span></a><span> gave this video two thumbs up</span>
+    <a href="/videos/{{vote.vid}}">
+    <div>
+    <h3>{{vote.videoTitle}}</h3>
+    <img src={{vote.thumbnail}}>
+    <div> {{ (votes | async).length }} </div>
+    </div>
+    </a>
+</md-card>
