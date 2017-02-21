@@ -25,6 +25,11 @@ import { SettingsComponent } from './settings/settings.component';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { TermsComponent } from './terms/terms.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { AboutComponent } from './about/about.component';
+import { UpdateComponent } from './update/update.component';
 
 export const firebaseConfig = {
  apiKey: "AIzaSyAJNsnnVl8HfbViTs5qCNGHs2AzN2BKSTE",
@@ -69,7 +74,12 @@ const appRoutes: Routes = [
     FolloweesComponent,
     UsersComponent,
     PopularComponent,
-    SettingsComponent
+    SettingsComponent,
+    ForgotpasswordComponent,
+    TermsComponent,
+    PrivacyComponent,
+    AboutComponent,
+    UpdateComponent
   ],
   imports: [
     BrowserModule,

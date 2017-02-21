@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MaterialModule } from '@angular/material';
+import {Observable} from 'rxjs/Observable';
 import {defaultFirebase,
   AngularFire,
   AuthMethods,
@@ -24,21 +25,30 @@ import { RouterModule,
 export class HomeComponent implements OnInit {
   
   votes: FirebaseListObservable<any>;
+  posts: FirebaseListObservable<any>;
+  dms: FirebaseListObservable<any>;
+  combinedlist: Observable<any>;
+
   
   constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router) {}
 
-  //TODO: retrieve data from posts, following activty, dms
   //TODO: combine latest fom votes, posts, and following activty
   //TODO: post dms at top
   
   ngOnInit() {
     this.af.auth.subscribe( (user) => {
       if (user) {
-        var uid_votes = user.uid+"-votes";
+        var vote_activity = user.uid+"-followee-votes";
+        var post_activity = user.uid+"-followee-posts";
+        var dm_activity = user.uid+"-followee-dm";
         var uid = user.uid;
         console.log(uid)
-        this.votes = this.af.database.list('user-data/'+uid_votes)
-          .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+      this.votes = this.af.database.list('user-data/'+vote_activity)
+        .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+      this.posts = this.af.database.list('user-data/'+post_activity)
+        .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+      this.dms = this.af.database.list('user-data/'+dm_activity)
+        .map((array) => array.reverse()) as FirebaseListObservable<any[]>;  
       } 
       else {
         console.log("no user")

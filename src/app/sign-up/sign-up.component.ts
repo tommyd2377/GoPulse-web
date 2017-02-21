@@ -26,16 +26,25 @@ export class SignUpComponent {
   email;
   password;
   displayName;
+  fullname;
  
   constructor(private af: AngularFire, private auth: FirebaseAuth, private router: Router) {}
+
+   ngOnInit() {
+    this.af.auth.subscribe( (user) => {
+      if (user) {
+        this.router.navigate(['/home']); 
+      }
+    })
+  }
   
   createUser() {
-    this.af.auth.createUser({ email: (this.email), password: (this.password)})
+    this.af.auth.createUser({ email: (this.email), password: (this.password)}).then
     this.af.auth.subscribe( (user) => {
       if (user) {
         var uid = user.uid;
         const user_data_db = this.af.database.object('user-data/' + uid);
-        user_data_db.set({ displayName: (this.displayName), email: (this.email)});
+        user_data_db.set({ fullname: (this.fullname), displayName: (this.displayName), email: (this.email), uid: (uid)});
         console.log(user + "created")
         this.router.navigate(['/home']); 
       } 

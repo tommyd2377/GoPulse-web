@@ -1,6 +1,24 @@
-<h1>Profile</h1>
+ <div id="header">
+      <a class="home-link" routerLink="/news/1" routerLinkActive="active" (click)="scrollTop()"></a>
+      <div class="header-text">
+        <div class="left">
+          <span class="header-nav">
+              <button class="button" md-raised-button (click)="home()">Home</button>
+              |
+              <button class="button" md-raised-button (click)="pulse()">Pulse</button>
+              |
+              <button class="button" md-raised-button (click)="search()">Search</button>
+              |
+              <button class="button" md-raised-button (click)="profile()">Profile</button>
+          </span>
+        </div>
+      </div>
+    </div>
+<h1>{{ displayName?.fullname }}</h1>
 <p>
-  {{ displayName | json }}
+  {{ displayName?.displayName }}
+  <br>  
+  {{ displayName?.email }}
 </p>
 <button (click)="follow()">Follow</button>
 

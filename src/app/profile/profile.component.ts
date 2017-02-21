@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
 import {defaultFirebase,
   AngularFire,
   AuthMethods,
@@ -21,20 +22,42 @@ import { RouterModule,
 })
 
 export class ProfileComponent implements OnInit {
+
+  votes: FirebaseListObservable<any>;
+  posts: FirebaseListObservable<any>;
+  dms: FirebaseListObservable<any>;
+  displayName;
   
-  constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router) {}
+  constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router, private user: UserService) {}
 
   ngOnInit() {
     this.af.auth.subscribe( (user) => {
-      if (user) {
-      var uid = user.uid;
-      console.log(uid)
-      } 
-      else {
-      console.log("no user")
-      }
-    });
+        if (user) {
+        var vote_activity = user.uid+"-votes";
+        var post_activity = user.uid+"-posts";
+        var dm_activity = user.uid+"-dm";
+        var uid = user.uid;
+        console.log(uid)
+          this.votes = this.af.database.list('user-data/'+vote_activity)
+            .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+          this.posts = this.af.database.list('user-data/'+post_activity)
+            .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+          this.dms = this.af.database.list('user-data/'+dm_activity)
+            .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+              var uid = user.uid;
+              this.user.fetch_user_data(uid)
+                .subscribe(user => {
+                  this.displayName = user;
+                  console.log(user)
+                })
+        }
+    })
   }
+
+      signOut() {
+        this.af.auth.logout();
+        this.router.navigate(['/welcomescreen'])
+    }
 
   scrollTop() {
     window.scrollTo(0, 0);

@@ -1,9 +1,10 @@
     <br>
     <md-input [formControl]="search" placeholder="search YouTube"></md-input>
-    <div *ngFor="let video of results | async">
+    <md-card *ngFor="let video of results | async">
+      <a href="/videos/{{video.id.videoId}}">
+      <img [src]="video.snippet.thumbnails.default.url"/>      
       <h3>{{video.snippet.title}}</h3>
-      <img [src]="video.snippet.thumbnails.default.url"/>
-      <button routerLink= "/videos/{{video.id.videoId}}">{{video.id.videoId}}</button>
-    </div>
+      </a>
+    </md-card>
 
 

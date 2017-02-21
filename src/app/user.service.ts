@@ -15,6 +15,8 @@ export class UserService {
   current_username: FirebaseObjectObservable<any[]>;
   other_username: FirebaseObjectObservable<any[]>;
   user_followers: FirebaseListObservable<any[]>;
+  displayName;
+  name: FirebaseListObservable<any>;
 
   constructor(private af: AngularFire) { }
 
@@ -22,5 +24,12 @@ export class UserService {
       this.other_username = this.af.database.object('user-data/'+id);
       return this.other_username
   }
+
+  returnDisplayNamse(uid) {
+    this.displayName = this.af.database.object('user-data/'+uid);
+    return this.displayName
+  }
+
+
   
 }

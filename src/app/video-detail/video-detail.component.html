@@ -22,4 +22,14 @@
 <button (click)="twoThumbsUp()">Two Thumbs Up</button>
 <button (click)="directMessage()">Direct Message</button>
 <p>{{description}}</p>
+  <md-input class="inputs" id="comment" [(ngModel)]="comment" type="text" name="comment" placeholder="post a comment"></md-input>
+  <br>
 <button (click)="post()">Post Comment</button>
+<md-card *ngFor="let comment of comments | async">
+  <a href="/user/{{comment.uid}}" style="text-decoration: none">
+    <h4>{{comment.username}}</h4>
+   <h5>{{comment.comment}}</h5>
+  </a>
+  </md-card>
+
+

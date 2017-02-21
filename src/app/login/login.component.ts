@@ -26,6 +26,14 @@ export class LoginComponent {
 
   constructor(public af: AngularFire, private router: Router) {}
 
+   ngOnInit() {
+    this.af.auth.subscribe( (user) => {
+      if (user) {
+        this.router.navigate(['/home']); 
+      }
+    })
+  }
+
   login() {
     this.af.auth.login({ email: (this.email), password: (this.password)},
     {provider: AuthProviders.Password, method: AuthMethods.Password})

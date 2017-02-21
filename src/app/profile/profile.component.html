@@ -14,6 +14,40 @@
         </div>
       </div>
     </div>
+<h1>{{ displayName?.fullname }}</h1>
 <p>
-  profile works!
+  {{ displayName?.displayName }}
+  <br>  
+  {{ displayName?.email }}
 </p>
+<button (click)="signOut()">Log Out</button>
+<h1>Your Activity</h1>
+<md-card *ngFor="let vote of votes | async">
+    <a href="/user/{{vote.uid}}" style="text-decoration: none"></a><span>You gave this video two thumbs up</span>
+    <a href="/videos/{{vote.vid}}" style="text-decoration: none">
+    <div>
+    <h3>{{vote.videoTitle}}</h3>
+    <img src={{vote.thumbnail}}>
+    <div> {{ (votes | async).length }} </div>
+    </div>
+    </a>
+</md-card>
+<md-card *ngFor="let post of posts | async">
+    <a href="/user/{{post.uid}}" style="text-decoration: none"></a><span>You gave this video two thumbs up and left a comment</span>
+    <a href="/videos/{{post.vid}}" style="text-decoration: none">
+    <div>
+    <h3>{{post.videoTitle}}</h3>
+    <img src={{post.thumbnail}}>
+    <div> {{ post.comment }} </div>
+    </div>
+    </a>
+</md-card>
+<md-card *ngFor="let dm of dms | async">
+    <a href="/user/{{dm.uid}}" style="text-decoration: none"></a><span>You sent you this video to watch</span>
+    <a href="/videos/{{dm.vid}}" style="text-decoration: none">
+    <div>
+    <h3>{{dm.videoTitle}}</h3>
+    <img src={{dm.thumbnail}}>
+    </div>
+    </a>
+</md-card>

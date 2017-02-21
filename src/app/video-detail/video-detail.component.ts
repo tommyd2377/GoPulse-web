@@ -35,6 +35,8 @@ export class VideoDetailComponent implements OnInit {
   id;
   thumbnail;
   username;
+  comment;
+  comments;
 
   constructor(private af: AngularFire, private Auth: FirebaseAuth, 
       public youtube: YoutubeService, private route: ActivatedRoute,
@@ -60,6 +62,8 @@ export class VideoDetailComponent implements OnInit {
                         this.title = video.items[0].snippet.title;
                         this.description = video.items[0].snippet.description;  
                         this.id = video.items[0].id;
+                        this.comments = this.af.database.list("video-data/"+(this.id)+"-posts")
+                        .map((array) => array.reverse()) as FirebaseListObservable<any[]>; 
                     })
                   }) 
   }
@@ -80,16 +84,19 @@ export class VideoDetailComponent implements OnInit {
                         this.id= video.items[0].id;
                         this.thumbnail = video.items[0].snippet.thumbnails.high.url;
                             const video_votes = this.af.database.list("video-data/"+(this.id)+"-votes")
-                            video_votes.push({ uid: (uid), username: ("username"), vid: (this.id),
+                            video_votes.push({ uid: (uid), username: (''), vid: (this.id),
                             videoTitle: (this.title), thumbnail: (this.thumbnail) });
                             console.log('worked', video_votes)
                             const votes = this.af.database.list("user-data/"+uid_votes)
-                            votes.push({ uid: (uid), username: ("username"), vid: (this.id),
+                            votes.push({ uid: (uid), username: (''), vid: (this.id),
                             videoTitle: (this.title), thumbnail: (this.thumbnail) });
-                                this.af.database.list('user-data/'+uid+'-votes', { preserveSnapshot: true})
+                                this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
                                   .subscribe(snapshots=>{
                                       snapshots.forEach(snapshot => {
-                                      console.log(snapshot.key, snapshot.val());
+                                        const follower = this.af.database.list("user-data/"+(snapshot.val().follower)+"-followee-votes")
+                                        follower.push({ uid: (uid), username: (''), vid: (this.id),
+                                        videoTitle: (this.title), thumbnail: (this.thumbnail) });
+                                        console.log(snapshot.val().follower);
                                       });
                                   })
                     })
@@ -106,7 +113,7 @@ export class VideoDetailComponent implements OnInit {
   directMessage() {
      this.af.auth.subscribe( (user) => {
         if (user) {
-          var uid_dm = user.uid+"-dm";
+          var uid_dms = user.uid+"-dms";
           var uid = user.uid;
           console.log(uid)
            this.route.params
@@ -118,16 +125,19 @@ export class VideoDetailComponent implements OnInit {
                         this.description = video.items[0].snippet.description;  
                         this.id= video.items[0].id;
                         this.thumbnail = video.items[0].snippet.thumbnails.high.url;
-                            const dm = this.af.database.list("user-data/"+uid_dm)
-                            dm.push({ uid: (uid), username: ("username"), vid: (this.id),
+                            const dm = this.af.database.list("user-data/"+uid_dms)
+                            dm.push({ uid: (uid), username: (''), vid: (this.id),
                             videoTitle: (this.title), thumbnail: (this.thumbnail) });
                             const video_dm = this.af.database.list("video-data/"+(this.id)+"-dm")
-                            video_dm.push({ uid: (uid), username: ("username"), vid: (this.id),
+                            video_dm.push({ uid: (uid), username: (''), vid: (this.id),
                             videoTitle: (this.title), thumbnail: (this.thumbnail) });
-                                this.af.database.list('user-data/'+uid+'-votes', { preserveSnapshot: true})
+                                this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
                                     .subscribe(snapshots=>{
                                         snapshots.forEach(snapshot => {
-                                        console.log(snapshot.key, snapshot.val());
+                                         const follower = this.af.database.list("user-data/"+(snapshot.val().follower)+"-followee-dm")
+                                        follower.push({ uid: (uid), username: (''), vid: (this.id),
+                                        videoTitle: (this.title), thumbnail: (this.thumbnail) });
+                                        console.log(snapshot.val().follower);
                                         });
                                       })
                       });
@@ -158,15 +168,18 @@ export class VideoDetailComponent implements OnInit {
                         this.thumbnail = video.items[0].snippet.thumbnails.high.url;
                             const posts = this.af.database.list("user-data/"+uid_posts)
                             posts.push({ uid: (uid), username: ("username"), vid: (this.id),
-                            videoTitle: (this.title), thumbnail: (this.thumbnail), comment: ("comment") });
+                            videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
                             const video_post = this.af.database.list("video-data/"+(this.id)+"-posts")
                             video_post.push({ uid: (uid), username: ("username"), vid: (this.id),
-                            videoTitle: (this.title), thumbnail: (this.thumbnail), comment: ("comment") });
-                                  this.af.database.list('user-data/'+uid+'-votes', { preserveSnapshot: true})
+                            videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
+                                  this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
                                       .subscribe(snapshots=>{
                                           snapshots.forEach(snapshot => {
-                                          console.log(snapshot.key, snapshot.val());
-                                          });
+                                            const follower = this.af.database.list("user-data/"+(snapshot.val().follower)+"-followee-posts")
+                                            follower.push({ uid: (uid), username: (''), vid: (this.id),
+                                            videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
+                                            console.log(snapshot.val().follower);
+                                            });
                                       })
                     });
                   })
