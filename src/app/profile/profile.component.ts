@@ -28,7 +28,8 @@ export class ProfileComponent implements OnInit {
   dms: FirebaseListObservable<any>;
   displayName;
   
-  constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router, private user: UserService) {}
+  constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router, 
+    private user: UserService) {}
 
   ngOnInit() {
     this.af.auth.subscribe( (user) => {
@@ -37,7 +38,7 @@ export class ProfileComponent implements OnInit {
         var post_activity = user.uid+"-posts";
         var dm_activity = user.uid+"-dm";
         var uid = user.uid;
-        console.log(uid)
+          
           this.votes = this.af.database.list('user-data/'+vote_activity)
             .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
           this.posts = this.af.database.list('user-data/'+post_activity)
@@ -45,11 +46,11 @@ export class ProfileComponent implements OnInit {
           this.dms = this.af.database.list('user-data/'+dm_activity)
             .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
               var uid = user.uid;
-              this.user.fetch_user_data(uid)
-                .subscribe(user => {
-                  this.displayName = user;
-                  console.log(user)
-                })
+              
+          this.user.fetch_user_data(uid)
+            .subscribe(user => {
+              this.displayName = user;
+            })
         }
     })
   }
@@ -77,6 +78,14 @@ export class ProfileComponent implements OnInit {
 
   profile() {
     this.router.navigate(['/profile'])
+  }
+
+  followers() {
+    this.router.navigate(['/followers'])
+  }
+
+  followees() {
+    this.router.navigate(['/followees'])
   }
 
 

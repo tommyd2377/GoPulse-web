@@ -22,14 +22,15 @@ import { FolloweesComponent } from './followees/followees.component';
 import { UsersComponent } from './users/users.component';
 import { PopularComponent } from './popular/popular.component';
 import { SettingsComponent } from './settings/settings.component';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/map';
-import 'rxjs/Rx';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { TermsComponent } from './terms/terms.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { AboutComponent } from './about/about.component';
 import { UpdateComponent } from './update/update.component';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
+import { ContactComponent } from './contact/contact.component';
 
 export const firebaseConfig = {
  apiKey: "AIzaSyAJNsnnVl8HfbViTs5qCNGHs2AzN2BKSTE",
@@ -47,6 +48,13 @@ const appRoutes: Routes = [
   { path: 'welcomescreen', component: WelcomescreenComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'followers', component: FollowersComponent },
+  { path: 'followees', component: FolloweesComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'terms', component: TermsComponent },
+  { path: 'privacy', component: PrivacyComponent },
+  { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'search', component: SearchComponent,
     children: [
       {path: 'videosearch', component: VideoSearchComponent},
@@ -79,7 +87,8 @@ const appRoutes: Routes = [
     TermsComponent,
     PrivacyComponent,
     AboutComponent,
-    UpdateComponent
+    UpdateComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
         var post_activity = user.uid+"-followee-posts";
         var dm_activity = user.uid+"-followee-dm";
         var uid = user.uid;
-        console.log(uid)
+      
       this.votes = this.af.database.list('user-data/'+vote_activity)
         .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
       this.posts = this.af.database.list('user-data/'+post_activity)
@@ -50,11 +50,12 @@ export class HomeComponent implements OnInit {
       this.dms = this.af.database.list('user-data/'+dm_activity)
         .map((array) => array.reverse()) as FirebaseListObservable<any[]>;  
       } 
+      
       else {
-        console.log("no user")
         this.router.navigate(['/welcomescreen'])
       }
-    });
+    
+  });
   }
 
   scrollTop() {

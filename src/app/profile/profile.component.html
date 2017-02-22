@@ -21,6 +21,8 @@
   {{ displayName?.email }}
 </p>
 <button (click)="signOut()">Log Out</button>
+<button (click)="followers()">Followers</button>
+<button (click)="followees()">Followees</button>
 <h1>Your Activity</h1>
 <md-card *ngFor="let vote of votes | async">
     <a href="/user/{{vote.uid}}" style="text-decoration: none"></a><span>You gave this video two thumbs up</span>

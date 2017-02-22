@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'settings',
@@ -6,11 +7,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings.component.css']
 })
 
-export class SettingsComponent implements OnInit {
+export class SettingsComponent {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit() {
+  about() {
+    this.router.navigate(['/about']); 
+  }
+
+   contact() {
+    this.router.navigate(['/contact']); 
+  }
+
+  terms() {
+    this.router.navigate(['/terms']); 
+  }
+
+  privacy() {
+    this.router.navigate(['/privacy']); 
+  }
+
+  profile() {
+    this.router.navigate(['/profile']); 
   }
 
 }

@@ -27,6 +27,20 @@ export class VideoSearchComponent {
         .switchMap(query => youtube.search(query));
     }
 }
+
+    //search = new FormControl;
+    //results: Observable<any>;
+    //query;
+
+    //constructor(public youtube:YoutubeService, private router: Router) {}
+
+    //go() {
+    // this.results = this.youtube.search(this.query)
+    //}
+    
+    //<md-input [(ngModel)]="query" placeholder="search YouTube"></md-input>
+    //<button (click)="go()">Go!</button>
+
     
 
 

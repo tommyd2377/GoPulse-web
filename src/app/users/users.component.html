@@ -9,16 +9,16 @@
               |
               <button class="button" md-raised-button (click)="search()">Search</button>
               |
-              <button class="button" md-raised-button (click)="profile()">Profile</button>
+              <button class="button" md-raised-button (click)="profileRoute()">Profile</button>
           </span>
         </div>
       </div>
     </div>
-<h1>{{ displayName?.fullname }}</h1>
+<h1>{{ profile?.fullname }}</h1>
 <p>
-  {{ displayName?.displayName }}
+  {{ profile?.displayName }}
   <br>  
-  {{ displayName?.email }}
+  {{ profile?.email }}
 </p>
 <button (click)="follow()">Follow</button>
 

@@ -24,12 +24,5 @@ export class UserService {
       this.other_username = this.af.database.object('user-data/'+id);
       return this.other_username
   }
-
-  returnDisplayNamse(uid) {
-    this.displayName = this.af.database.object('user-data/'+uid);
-    return this.displayName
-  }
-
-
   
 }

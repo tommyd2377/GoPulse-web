@@ -44,4 +44,8 @@ export class LoginComponent {
     this.router.navigate(['/welcomescreen'])
   }
 
+  forgotpassword() {
+    this.router.navigate(['/forgotpassword'])
+  }
+
 }

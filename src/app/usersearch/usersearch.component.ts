@@ -22,7 +22,7 @@ export class UsersearchComponent {
   constructor(private af: AngularFire) {}
 
   userSearch(userquery: String) {
-    console.log(this.userquery)
+    
     this.users = this.af.database.list('user-data/',{
       query: {
         orderByChild: 'displayName',

@@ -39,156 +39,184 @@ export class VideoDetailComponent implements OnInit {
   comments;
 
   constructor(private af: AngularFire, private Auth: FirebaseAuth, 
-      public youtube: YoutubeService, private route: ActivatedRoute,
-      private router: Router, sanitizer: DomSanitizer, private userservice: UserService) {
-        this.route.params
-              .map(params => params['id'])
-                  .subscribe((id) => {
-                  this.youtube.getVideo(id)
-                    .subscribe(video => { 
-                        this.id = video.items[0].id;
-                        this.url = sanitizer.bypassSecurityTrustResourceUrl
-                        ("https://www.youtube.com/embed/"+this.id+"?autoplay=1");
-                    })
-                  }) 
+    public youtube: YoutubeService, private route: ActivatedRoute,
+    private router: Router, sanitizer: DomSanitizer, private userservice: UserService) {
+        
+      this.route.params
+        .map(params => params['id'])
+        
+        .subscribe((id) => {
+          this.youtube.getVideo(id)
+          
+        .subscribe(video => { 
+          this.id = video.items[0].id;
+          this.url = sanitizer.bypassSecurityTrustResourceUrl
+          ("https://www.youtube.com/embed/"+this.id+"?autoplay=1");
+        })
+      }) 
   }
 
   ngOnInit() {
-      this.route.params
-              .map(params => params['id'])
-                  .subscribe((id) => {
-                  this.youtube.getVideo(id)
-                    .subscribe(video => {
-                        this.title = video.items[0].snippet.title;
-                        this.description = video.items[0].snippet.description;  
-                        this.id = video.items[0].id;
-                        this.comments = this.af.database.list("video-data/"+(this.id)+"-posts")
-                        .map((array) => array.reverse()) as FirebaseListObservable<any[]>; 
-                    })
-                  }) 
+    
+    this.route.params
+      .map(params => params['id'])
+        .subscribe((id) => {
+          
+          this.youtube.getVideo(id)
+            .subscribe(video => {
+              this.title = video.items[0].snippet.title;
+              this.description = video.items[0].snippet.description;  
+              this.id = video.items[0].id;
+              this.comments = this.af.database.list("video-data/"+(this.id)+"-posts")
+              .map((array) => array.reverse()) as FirebaseListObservable<any[]>; 
+            })
+        }) 
   }
   
   twoThumbsUp() { 
-      this.af.auth.subscribe( (user) => {
-        if (user) {
-          var uid_votes = user.uid+"-votes";
-          var uid = user.uid;
-          console.log(uid)
-           this.route.params
-              .map(params => params['id'])
-                  .subscribe((id) => {
-                  this.youtube.getVideo(id)
-                    .subscribe(video => {
-                        this.title = video.items[0].snippet.title;
-                        this.description = video.items[0].snippet.description;  
-                        this.id= video.items[0].id;
-                        this.thumbnail = video.items[0].snippet.thumbnails.high.url;
-                            const video_votes = this.af.database.list("video-data/"+(this.id)+"-votes")
-                            video_votes.push({ uid: (uid), username: (''), vid: (this.id),
-                            videoTitle: (this.title), thumbnail: (this.thumbnail) });
-                            console.log('worked', video_votes)
-                            const votes = this.af.database.list("user-data/"+uid_votes)
-                            votes.push({ uid: (uid), username: (''), vid: (this.id),
-                            videoTitle: (this.title), thumbnail: (this.thumbnail) });
-                                this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
-                                  .subscribe(snapshots=>{
-                                      snapshots.forEach(snapshot => {
-                                        const follower = this.af.database.list("user-data/"+(snapshot.val().follower)+"-followee-votes")
-                                        follower.push({ uid: (uid), username: (''), vid: (this.id),
-                                        videoTitle: (this.title), thumbnail: (this.thumbnail) });
-                                        console.log(snapshot.val().follower);
-                                      });
-                                  })
-                    })
-                  }) 
+  
+    this.af.auth.subscribe( (user) => {
+      if (user) {
+        var uid_votes = user.uid+"-votes";
+        var uid = user.uid;
+        var displayName = user.auth.displayName;
+        
+        this.route.params
+        .map(params => params['id'])
+        
+        .subscribe((id) => {
+          this.youtube.getVideo(id)
+          
+        .subscribe(video => {
+          this.title = video.items[0].snippet.title;
+          this.id= video.items[0].id;
+          this.thumbnail = video.items[0].snippet.thumbnails.high.url;
+          
+          const video_votes = this.af.database.list("video-data/"+(this.id)+"-votes")
+            video_votes.push({ uid: (uid), username: (displayName), vid: (this.id),
+            videoTitle: (this.title), thumbnail: (this.thumbnail) });
+          
+          const votes = this.af.database.list("user-data/"+uid_votes)
+            votes.push({ uid: (uid), username: (displayName), vid: (this.id),
+            videoTitle: (this.title), thumbnail: (this.thumbnail) });
+          
+          this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
+            .subscribe(snapshots=>{
+              snapshots.forEach(snapshot => {
+                const follower = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-votes")
+                console.log(snapshot.val().follower_uid)
+                follower.push({ uid: (uid), username: (displayName), vid: (this.id),
+                videoTitle: (this.title), thumbnail: (this.thumbnail) });
+                });
+              })
+            
+            })
+          }) 
         } 
+        
         else {
           console.log("no user")
           this.router.navigate(['/weclomescreen'])
         }
-      });
+      
+    });
   } 
            
   //TODO: save data to user selection
   directMessage() {
-     this.af.auth.subscribe( (user) => {
-        if (user) {
-          var uid_dms = user.uid+"-dms";
-          var uid = user.uid;
-          console.log(uid)
-           this.route.params
-              .map(params => params['id'])
-                  .subscribe((id) => {
-                  this.youtube.getVideo(id)
-                    .subscribe(video => {
-                        this.title = video.items[0].snippet.title;
-                        this.description = video.items[0].snippet.description;  
-                        this.id= video.items[0].id;
-                        this.thumbnail = video.items[0].snippet.thumbnails.high.url;
-                            const dm = this.af.database.list("user-data/"+uid_dms)
-                            dm.push({ uid: (uid), username: (''), vid: (this.id),
-                            videoTitle: (this.title), thumbnail: (this.thumbnail) });
-                            const video_dm = this.af.database.list("video-data/"+(this.id)+"-dm")
-                            video_dm.push({ uid: (uid), username: (''), vid: (this.id),
-                            videoTitle: (this.title), thumbnail: (this.thumbnail) });
-                                this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
-                                    .subscribe(snapshots=>{
-                                        snapshots.forEach(snapshot => {
-                                         const follower = this.af.database.list("user-data/"+(snapshot.val().follower)+"-followee-dm")
-                                        follower.push({ uid: (uid), username: (''), vid: (this.id),
-                                        videoTitle: (this.title), thumbnail: (this.thumbnail) });
-                                        console.log(snapshot.val().follower);
-                                        });
-                                      })
-                      });
-                    })
+    
+    this.af.auth.subscribe( (user) => {
+      if (user) {
+        var uid_dms = user.uid+"-dms";
+        var uid = user.uid;
+        var displayName = user.auth.displayName;
+          
+          this.route.params
+          .map(params => params['id'])
+          
+          .subscribe((id) => {
+            this.youtube.getVideo(id)
+          
+          .subscribe(video => {
+            this.title = video.items[0].snippet.title;
+            this.description = video.items[0].snippet.description;  
+            this.id= video.items[0].id;
+            this.thumbnail = video.items[0].snippet.thumbnails.high.url;
+                            
+            const dm = this.af.database.list("user-data/"+uid_dms)
+            dm.push({ uid: (uid), username: (displayName), vid: (this.id),
+            videoTitle: (this.title), thumbnail: (this.thumbnail) });
+            const video_dm = this.af.database.list("video-data/"+(this.id)+"-dm")
+            video_dm.push({ uid: (uid), username: (displayName), vid: (this.id),
+            videoTitle: (this.title), thumbnail: (this.thumbnail) });
+            
+            this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
+              .subscribe(snapshots=>{
+                snapshots.forEach(snapshot => {
+                                        
+                const follower = this.af.database.list("user-data/"+(snapshot.val().follower)+"-followee-dm")
+                follower.push({ uid: (uid), username: (displayName), vid: (this.id),
+                videoTitle: (this.title), thumbnail: (this.thumbnail) });
+                
+                });
+                })
+          });
+          })
         } 
+        
         else {
           console.log("no user")
           this.router.navigate(['/weclomescreen'])
         }
-      });
+      
+    });
   }
 
   post() {
-     this.af.auth.subscribe( (user) => {
-        if (user) {
-          var uid_posts = user.uid+"-posts";
-          var uid = user.uid;
-          console.log(uid)
-            console.log(uid)
+    
+    this.af.auth.subscribe( (user) => {
+      if (user) {
+        var uid_posts = user.uid+"-posts";
+        var uid = user.uid;
+        var displayName = user.auth.displayName;
+
            this.route.params
-              .map(params => params['id'])
-                  .subscribe((id) => {
-                  this.youtube.getVideo(id)
-                    .subscribe(video => {
-                        this.title = video.items[0].snippet.title;
-                        this.description = video.items[0].snippet.description;  
-                        this.id= video.items[0].id;
-                        this.thumbnail = video.items[0].snippet.thumbnails.high.url;
-                            const posts = this.af.database.list("user-data/"+uid_posts)
-                            posts.push({ uid: (uid), username: ("username"), vid: (this.id),
-                            videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
-                            const video_post = this.af.database.list("video-data/"+(this.id)+"-posts")
-                            video_post.push({ uid: (uid), username: ("username"), vid: (this.id),
-                            videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
-                                  this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
-                                      .subscribe(snapshots=>{
-                                          snapshots.forEach(snapshot => {
-                                            const follower = this.af.database.list("user-data/"+(snapshot.val().follower)+"-followee-posts")
-                                            follower.push({ uid: (uid), username: (''), vid: (this.id),
-                                            videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
-                                            console.log(snapshot.val().follower);
-                                            });
-                                      })
+           .map(params => params['id'])
+           
+           .subscribe((id) => {
+              this.youtube.getVideo(id)
+                    
+            .subscribe(video => {
+              this.title = video.items[0].snippet.title;
+              this.description = video.items[0].snippet.description;  
+              this.id= video.items[0].id;
+              this.thumbnail = video.items[0].snippet.thumbnails.high.url;
+                            
+              const posts = this.af.database.list("user-data/"+uid_posts)
+              posts.push({ uid: (uid), username: (displayName), vid: (this.id),
+              videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
+              const video_post = this.af.database.list("video-data/"+(this.id)+"-posts")
+              video_post.push({ uid: (uid), username: (displayName), vid: (this.id),
+              videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
+              
+                this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
+                  .subscribe(snapshots=>{
+                    snapshots.forEach(snapshot => {
+                      const follower = this.af.database.list("user-data/"+(snapshot.val().follower)+"-followee-posts")
+                      follower.push({ uid: (uid), username: (displayName), vid: (this.id),
+                      videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
                     });
-                  })
-        } 
+                    })
+            });
+          })
+    } 
+        
         else {
           console.log("no user")
           this.router.navigate(['/weclomescreen'])
         }
-      });
+      
+    });
   }
 
   scrollTop() {

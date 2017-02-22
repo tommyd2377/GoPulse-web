@@ -1,3 +1,23 @@
-<p>
-  followers works!
-</p>
+ <div id="header">
+      <a class="home-link" routerLink="/news/1" routerLinkActive="active" (click)="scrollTop()"></a>
+      <div class="header-text">
+        <div class="left">
+          <span class="header-nav">
+              <button class="button" md-raised-button (click)="home()">Home</button>
+              |
+              <button class="button" md-raised-button (click)="pulse()">Pulse</button>
+              |
+              <button class="button" md-raised-button (click)="search()">Search</button>
+              |
+              <button class="button" md-raised-button (click)="profile()">Profile</button>
+          </span>
+        </div>
+      </div>
+    </div>
+<h1>Your Followers</h1>
+<md-card *ngFor="let follower of followers | async">
+  <a href="/user/{{follower.follower_uid}}">
+    <h3>{{follower.follower_username}}</h3>
+  </a>
+</md-card>
+
