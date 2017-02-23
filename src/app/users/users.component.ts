@@ -18,8 +18,10 @@ import 'rxjs/add/operator/switchMap';
 })
 
 export class UsersComponent implements OnInit {
-
-
+  
+  votes: FirebaseListObservable<any>;
+  posts: FirebaseListObservable<any>;
+  dms: FirebaseListObservable<any>;
   name;
   profile;
 
@@ -31,7 +33,18 @@ export class UsersComponent implements OnInit {
     this.route.params
       .map(params => params['id'])
         .subscribe((id) => {
-   
+          
+          var vote_activity = id+"-votes";
+          var post_activity = id+"-posts";
+          var dm_activity = id+"-dm";
+
+          this.votes = this.af.database.list('user-data/'+vote_activity)
+            .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+          this.posts = this.af.database.list('user-data/'+post_activity)
+            .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+          this.dms = this.af.database.list('user-data/'+dm_activity)
+            .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+    
     this.users.fetch_user_data(id)
         .subscribe(user => {
           this.profile = user;
@@ -62,7 +75,7 @@ export class UsersComponent implements OnInit {
               const followees = this.af.database.list("user-data/"+uid_followees)
               followees.push({ followee_uid: (id), followee_username: (''), follower_username: (displayName), follower_uid: (uid) });
               const follower = this.af.database.list("user-data/"+id+"-followers")
-              follower.push({ followee_uid: (id), followee_username: (''), follower_username: (displayName), follower_uid: (uid) });
+              follower.push({ followee_uid: (id), followee_username: (id), follower_username: (displayName), follower_uid: (uid) });
             
             this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
               .subscribe(snapshots=>{

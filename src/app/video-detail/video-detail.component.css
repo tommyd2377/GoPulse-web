@@ -1,0 +1,21 @@
+.header {
+    background-color: lawngreen;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    text-align: center;
+}
+
+.video {
+    color: white;
+    text-align: center;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+
+.div {
+    text-align: center;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif
+}
+
+.button {
+    color: black;
+    background-color: lawngreen;
+}

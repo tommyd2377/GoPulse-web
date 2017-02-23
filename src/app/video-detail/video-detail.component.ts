@@ -154,7 +154,7 @@ export class VideoDetailComponent implements OnInit {
               .subscribe(snapshots=>{
                 snapshots.forEach(snapshot => {
                                         
-                const follower = this.af.database.list("user-data/"+(snapshot.val().follower)+"-followee-dm")
+                const follower = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-dm")
                 follower.push({ uid: (uid), username: (displayName), vid: (this.id),
                 videoTitle: (this.title), thumbnail: (this.thumbnail) });
                 
@@ -202,7 +202,8 @@ export class VideoDetailComponent implements OnInit {
                 this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
                   .subscribe(snapshots=>{
                     snapshots.forEach(snapshot => {
-                      const follower = this.af.database.list("user-data/"+(snapshot.val().follower)+"-followee-posts")
+                      console.log(snapshot.val().follower_uid)
+                      const follower = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-posts")
                       follower.push({ uid: (uid), username: (displayName), vid: (this.id),
                       videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
                     });

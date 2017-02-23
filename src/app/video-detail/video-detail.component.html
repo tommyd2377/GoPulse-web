@@ -1,35 +1,46 @@
- <div id="header">
+ <div class="header">
       <a class="home-link" routerLink="/news/1" routerLinkActive="active" (click)="scrollTop()"></a>
       <div class="header-text">
         <div class="left">
           <span class="header-nav">
-              <button class="button" md-raised-button (click)="home()">Home</button>
+              <br>  
+              <a (click)="home()">Home</a>
               |
-              <button class="button" md-raised-button (click)="pulse()">Pulse</button>
+              <a (click)="pulse()">Pulse</a>
               |
-              <button class="button" md-raised-button (click)="search()">Search</button>
+              <a (click)="search()">Search</a>
               |
-              <button class="button" md-raised-button (click)="profile()">Profile</button>
+              <a (click)="profile()">Profile</a>
+              <br>
+              <br>
           </span>
         </div>
       </div>
     </div>
-<h1>{{title}}</h1>
+    <br>
+    <br>
+<div class="video">
+<md-card>    
+<h1 style="color: lawngreen">{{title}}</h1>
 <iframe width="420" height="315"
-[src]="url" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen">
+[src]="url" allowfullscreen="allowfullscreen" frameborder="0" marginwidth="0" marginheight="0" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen">
 </iframe>
 <br>
-<button (click)="twoThumbsUp()">Two Thumbs Up</button>
-<button (click)="directMessage()">Direct Message</button>
+<br>
+<button class="button" md-raised-button (click)="twoThumbsUp()">Two Thumbs Up</button>
 <p>{{description}}</p>
-  <md-input class="inputs" id="comment" [(ngModel)]="comment" type="text" name="comment" placeholder="post a comment"></md-input>
+</md-card>
+</div>
+<div class="div">
+  <md-input style="color: white" class="inputs" id="comment" [(ngModel)]="comment" type="text" name="comment" placeholder="post a comment"></md-input>
   <br>
-<button (click)="post()">Post Comment</button>
+<button md-raised-button style="background: lawngreen" (click)="post()">Post Comment</button>
 <md-card *ngFor="let comment of comments | async">
-  <a href="/user/{{comment.uid}}" style="text-decoration: none">
+  <a href="/user/{{comment.uid}}" style="color: lawngreen">
     <h4>{{comment.username}}</h4>
    <h5>{{comment.comment}}</h5>
   </a>
   </md-card>
+  </div>
 
 

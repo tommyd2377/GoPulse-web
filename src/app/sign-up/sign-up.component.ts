@@ -50,18 +50,21 @@ export class SignUpComponent {
     
     this.af.auth.createUser({ email: (this.email), password: (this.password)})
     this.af.auth.subscribe( (user1) => {
+        
         if (user1) {
-           var user = firebase.auth().currentUser;
-           user.updateProfile({
+          var user = firebase.auth().currentUser;
+          user.updateProfile({
             displayName: (this.displayName),
             photoURL: 'some/url',
-           })
+          })
+          
           console.log(user1)
           console.log(user)
+          
           var uid = user.uid;
           const user_data_db = this.af.database.object('user-data/' + uid);
           user_data_db.set({ fullname: (this.fullname), displayName: (this.displayName), 
-            email: (this.email), uid: (uid)});
+          email: (this.email), uid: (uid)});
             this.router.navigate(['/home']); 
         } 
         
@@ -80,7 +83,7 @@ export class SignUpComponent {
     this.router.navigate(['/about']); 
   }
 
-   contact() {
+  contact() {
     this.router.navigate(['/contact']); 
   }
 

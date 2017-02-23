@@ -1,14 +1,29 @@
-<button md-raised-button (click)="welcomeScreen()">Back</button>
-<p>Please enter you GoPulse account information</p>
-   <md-input id="txtEmail" [(ngModel)]="email" type="email" name="email" placeholder="email"></md-input>
+<header class="header">
+  <a class="backbutton" (click)="welcomeScreen()">< Welcome Screen</a>
+  </header>
   <br>
   <br>
-  <md-input id="txtPassword" [(ngModel)]="password" type="password" name="password" placeholder="password"></md-input>
+  <div class="center">
   <br>
   <br>
-  <button class="button" md-raised-button (click)="login()">Login</button>
+  <br>
+   <md-input id="txtEmail" style="color: white" [(ngModel)]="email" type="email" name="email" placeholder="email"></md-input>
   <br>
   <br>
-  <a class="backbutton" (click)="forgotpassword()">Forgot your GoPulse password?</a>
+  <md-input id="txtPassword" style="color: white" [(ngModel)]="password" type="password" name="password" placeholder="password"></md-input>
   <br>
   <br>
+  <button class="button" md-raised-button style="background: lawngreen" (click)="login()">Login</button>
+  <br>
+  <br>
+   <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <footer>
+  <a class="backbutton" style="color: white" (click)="forgotpassword()">Forgot your GoPulse password?</a>
+  </footer>
+  </div>

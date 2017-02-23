@@ -27,10 +27,13 @@ import { TermsComponent } from './terms/terms.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { AboutComponent } from './about/about.component';
 import { UpdateComponent } from './update/update.component';
+import { ContactComponent } from './contact/contact.component';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
-import { ContactComponent } from './contact/contact.component';
+import { UserfollowersComponent } from './userfollowers/userfollowers.component';
+import { UserfolloweesComponent } from './userfollowees/userfollowees.component';
+
 
 export const firebaseConfig = {
  apiKey: "AIzaSyAJNsnnVl8HfbViTs5qCNGHs2AzN2BKSTE",
@@ -43,13 +46,15 @@ export const firebaseConfig = {
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'videos/:id', component: VideoDetailComponent },
-  { path: 'user/:id', component: UsersComponent },
+  { path: 'user/:id', component: UsersComponent, },
   { path: 'popular', component: PopularComponent},
   { path: 'welcomescreen', component: WelcomescreenComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'followers', component: FollowersComponent },
   { path: 'followees', component: FolloweesComponent },
+  { path: 'userfollowers/:id', component: UserfollowersComponent },
+  { path: 'userfollowees/:id', component: UserfolloweesComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'about', component: AboutComponent },
   { path: 'terms', component: TermsComponent },
@@ -88,7 +93,9 @@ const appRoutes: Routes = [
     PrivacyComponent,
     AboutComponent,
     UpdateComponent,
-    ContactComponent
+    ContactComponent,
+    UserfollowersComponent,
+    UserfolloweesComponent
   ],
   imports: [
     BrowserModule,

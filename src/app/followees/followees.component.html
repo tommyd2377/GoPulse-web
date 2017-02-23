@@ -1,20 +1,27 @@
- <div id="header">
+<div class="header">
       <a class="home-link" routerLink="/news/1" routerLinkActive="active" (click)="scrollTop()"></a>
       <div class="header-text">
         <div class="left">
           <span class="header-nav">
-              <button class="button" md-raised-button (click)="home()">Home</button>
+              <br>  
+              <a (click)="home()">Home</a>
               |
-              <button class="button" md-raised-button (click)="pulse()">Pulse</button>
+              <a (click)="pulse()">Pulse</a>
               |
-              <button class="button" md-raised-button (click)="search()">Search</button>
+              <a (click)="search()">Search</a>
               |
-              <button class="button" md-raised-button (click)="profile()">Profile</button>
+              <a (click)="profile()">Profile</a>
+              <br>
+              <br>
           </span>
         </div>
       </div>
-    </div>
+</div>
+<md-card class="top">
 <h1>People you are following</h1>
+</md-card>
 <md-card *ngFor="let followee of followees | async">
-    <h3>{{followee.followee_username}}</h3>
+    <a href="/user/{{followee.followee_uid}}">
+    <h3>{{followee.followee_uid}}</h3>
+    </a>
 </md-card>

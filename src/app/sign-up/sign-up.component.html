@@ -1,39 +1,39 @@
 <header class="header">
-  <br>
-  <a class="backbutton" (click)="welcomeScreen()">Back</a>
-  <br>
-  <br>
-</header>
-<div class="grey">
-  <md-input class="inputs" id="fullname" [(ngModel)]="fullname" type="text" name="fullname" placeholder="fullname"></md-input>
+  <a class="backbutton" (click)="welcomeScreen()">< Welcome Screen</a>
+  </header>
   <br>
   <br>
-  <md-input class="inputs" id="displayName" [(ngModel)]="displayName" type="text" name="displayName" placeholder="username"></md-input>
   <br>
   <br>
-  <md-input class="inputs" id="txtEmail" [(ngModel)]="email" type="email" name="email" placeholder="email"></md-input>
+  <br>
+<div class="center">
+  <md-input class="inputs" style="color: white" id="fullname" [(ngModel)]="fullname" type="text" name="fullname" placeholder="fullname"></md-input>
   <br>
   <br>
-  <md-input class="inputs" id="txtPassword" [(ngModel)]="password" type="password" name="password" placeholder="password"></md-input>
+  <md-input class="inputs" style="color: white" id="displayName" [(ngModel)]="displayName" type="text" name="displayName" placeholder="username"></md-input>
   <br>
   <br>
-  <button class="button" md-raised-button id="btnSignUp" (click)="createUser()" type="button" name="signup">Sign Up</button>
-</div>
+  <md-input class="inputs" style="color: white" id="txtEmail" [(ngModel)]="email" type="email" name="email" placeholder="email"></md-input>
   <br>
   <br>
+  <md-input class="inputs" style="color: white" id="txtPassword" [(ngModel)]="password" type="password" name="password" placeholder="password"></md-input>
+  <br>
+  <br>
+  <button class="button" style="color: white" md-raised-button style="background: lawngreen" id="btnSignUp" (click)="createUser()" type="button" name="signup">Sign Up</button>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>  
+  <br>
+  <footer class="footer">
   <br>
   <a class="backbutton" (click)="about()">About</a>
   <br>
-  <br>
-  <br>
   <a class="backbutton" (click)="contact()">Contact</a>
-  <br>
-  <br>
   <br>
   <a class="backbutton" (click)="terms()">Terms and Conditions</a>
   <br>
-  <br>
-  <br>
   <a class="backbutton" (click)="privacy()">Privacy Policy</a>
-  <br>
-  <br>
+  </footer>
+</div>

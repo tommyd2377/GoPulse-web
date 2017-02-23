@@ -25,7 +25,7 @@ export class UsersearchComponent {
     
     this.users = this.af.database.list('user-data/',{
       query: {
-        orderByChild: 'displayName',
+        orderByChild: 'fullname',
         equalTo: (this.userquery)
       }
     })

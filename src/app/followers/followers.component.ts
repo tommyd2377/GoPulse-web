@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MaterialModule } from '@angular/material';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { UserService } from '../user.service';
 import {defaultFirebase,
   AngularFire,
@@ -40,6 +40,7 @@ export class FollowersComponent implements OnInit {
         this.followers = this.af.database.list('user-data/'+uid_followers)
           .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
       }
+    
     })
   }
 

@@ -1,10 +1,12 @@
+    <div class="videos">
     <br>
     <md-input [formControl]="search" placeholder="search YouTube"></md-input>
     <md-card *ngFor="let video of results | async">
       <a href="/videos/{{video.id.videoId}}">
       <img [src]="video.snippet.thumbnails.default.url"/>      
-      <h3>{{video.snippet.title}}</h3>
+      <h3 style="color: lawngreen">{{video.snippet.title}}</h3>
       </a>
     </md-card>
+    </div>
 
 

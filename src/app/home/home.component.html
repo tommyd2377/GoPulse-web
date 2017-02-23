@@ -1,40 +1,50 @@
- <div id="header">
+ <div class="header">
       <a class="home-link" routerLink="/news/1" routerLinkActive="active" (click)="scrollTop()"></a>
       <div class="header-text">
         <div class="left">
           <span class="header-nav">
-              <button class="button" md-raised-button (click)="home()">Home</button>
+              <br>  
+              <a (click)="home()">Home</a>
               |
-              <button class="button" md-raised-button (click)="pulse()">Pulse</button>
+              <a (click)="pulse()">Pulse</a>
               |
-              <button class="button" md-raised-button (click)="search()">Search</button>
+              <a (click)="search()">Search</a>
               |
-              <button class="button" md-raised-button (click)="profile()">Profile</button>
+              <a (click)="profile()">Profile</a>
+              <br>
+              <br>
           </span>
         </div>
       </div>
     </div>
+ <div class="videos"> 
+<div class="center">
+<p>This is a beta release. There are known bugs and there may be data loss. Please contact me at tom@gopulse.io with any questions or issues.</p>
+<p>If you've just signed up you can find users or videos or both in the Search tab above.</p>
+<p>Inviting a handful of friends or family to signup and follow each other will create an engaging experience very quickly.</p>
+</div>
 <h1>Activity</h1>
-<md-card *ngFor="let vote of votes | async">
-    <a href="/user/{{vote.uid}}" style="text-decoration: none"><span>{{vote.username}}</span></a><span> gave this video two thumbs up</span>
-    <a href="/videos/{{vote.vid}}" style="text-decoration: none">
-    <div>
-    <h3>{{vote.videoTitle}}</h3>
-    <img src={{vote.thumbnail}}>
-    <div> {{ (votes | async).length }} </div>
-    </div>
-    </a>
-</md-card>
+    <md-card *ngFor="let vote of votes | async">
+      <a href="/user/{{vote.uid}}" style="color: lawngreen"><span>{{vote.username}}</span></a><span> gave this video two thumbs up</span>
+      <a href="/videos/{{vote.vid}}" style="color: lawngreen">
+      <div>
+      <h3>{{vote.videoTitle}}</h3>
+      <img style="height: 90px" style="width: 160px" [src]="vote.thumbnail"/>
+      </div>
+      </a>
+    </md-card>
+
 <md-card *ngFor="let post of posts | async">
-    <a href="/user/{{post.uid}}" style="text-decoration: none"><span>{{post.username}}</span></a><span> gave this video two thumbs up and left a comment</span>
-    <a href="/videos/{{post.vid}}" style="text-decoration: none">
+    <a href="/user/{{post.uid}}" style="color: lawngreen"><span>{{post.username}}</span></a><span> gave this video two thumbs up and left a comment</span>
+    <a href="/videos/{{post.vid}}" style="color: lawngreen">
     <div>
     <h3>{{post.videoTitle}}</h3>
-    <img src={{post.thumbnail}}>
-    <div> {{ post.comment }} </div>
+    <img style="height: 90px" style="width: 160px" src={{post.thumbnail}}>
+    <p> {{ post.comment }} </p>
     </div>
     </a>
 </md-card>
+
 <md-card *ngFor="let dm of dms | async">
     <a href="/user/{{dm.uid}}" style="text-decoration: none"><span>{{dm.username}}</span></a><span> sent you this video to watch</span>
     <a href="/videos/{{dm.vid}}" style="text-decoration: none">
@@ -44,3 +54,4 @@
     </div>
     </a>
 </md-card>
+ </div>

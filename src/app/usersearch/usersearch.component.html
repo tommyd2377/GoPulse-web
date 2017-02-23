@@ -1,6 +1,14 @@
+    <div class="users">
     <br>
     <md-input [(ngModel)]="userquery" (keyup)="userSearch()" id="userquery" name="userquery" placeholder="search for users"></md-input>
     <div *ngFor="let user of users | async">
-      <h3>{{user.displayName}}</h3>
-        <button routerLink= "/user/{{user.uid}}">{{user.displayName}}</button>
+    <a href="/user/{{user.uid}}">
+    <md-card style="color: lawngreen">
+      <h4>{{user.displayName}}</h4>
+     </md-card>
+    </a>
+    </div>
+     <div class="center">
+     <p>Our user search is currently being improved. For now all queries must exactly match the full name of the user you are searching for. Capitalization counts.</p>
+    </div>
     </div>

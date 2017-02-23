@@ -1,20 +1,27 @@
- <div id="header">
+<div class="header">
       <a class="home-link" routerLink="/news/1" routerLinkActive="active" (click)="scrollTop()"></a>
       <div class="header-text">
         <div class="left">
           <span class="header-nav">
-              <button class="button" md-raised-button (click)="home()">Home</button>
+              <br>  
+              <a (click)="home()">Home</a>
               |
-              <button class="button" md-raised-button (click)="pulse()">Pulse</button>
+              <a (click)="pulse()">Pulse</a>
               |
-              <button class="button" md-raised-button (click)="search()">Search</button>
+              <a (click)="search()">Search</a>
               |
-              <button class="button" md-raised-button (click)="profile()">Profile</button>
+              <a (click)="profile()">Profile</a>
+              <br>
+              <br>
           </span>
         </div>
       </div>
     </div>
+<div class="top">    
 <h1>Search</h1>
-<button routerLink="usersearch">Users</button>
-<button routerLink="videosearch">Videos</button>
+</div>
+<div class="buttons">
+<button routerLink="usersearch" md-raised-button style="text-align: center" style="color: black" style="background: lawngreen">Users</button>
+<button routerLink="videosearch" md-raised-button style="text-align: center" style="color: black" style="background: lawngreen">Videos</button>
+</div>
 <router-outlet></router-outlet>

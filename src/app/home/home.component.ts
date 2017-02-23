@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   votes: FirebaseListObservable<any>;
   posts: FirebaseListObservable<any>;
   dms: FirebaseListObservable<any>;
+  following: FirebaseListObservable<any>;
   combinedlist: Observable<any>;
 
   
@@ -41,9 +42,12 @@ export class HomeComponent implements OnInit {
         var vote_activity = user.uid+"-followee-votes";
         var post_activity = user.uid+"-followee-posts";
         var dm_activity = user.uid+"-followee-dm";
+        var following_activity = user.uid+"-following-activity";
         var uid = user.uid;
       
       this.votes = this.af.database.list('user-data/'+vote_activity)
+        .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+      this.following = this.af.database.list('user-data/'+following_activity)
         .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
       this.posts = this.af.database.list('user-data/'+post_activity)
         .map((array) => array.reverse()) as FirebaseListObservable<any[]>;

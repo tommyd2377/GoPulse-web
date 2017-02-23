@@ -1,24 +1,52 @@
- <div id="header">
+<div class="header">
       <a class="home-link" routerLink="/news/1" routerLinkActive="active" (click)="scrollTop()"></a>
       <div class="header-text">
         <div class="left">
           <span class="header-nav">
-              <button class="button" md-raised-button (click)="home()">Home</button>
+              <br>  
+              <a (click)="home()">Home</a>
               |
-              <button class="button" md-raised-button (click)="pulse()">Pulse</button>
+              <a (click)="pulse()">Pulse</a>
               |
-              <button class="button" md-raised-button (click)="search()">Search</button>
+              <a (click)="search()">Search</a>
               |
-              <button class="button" md-raised-button (click)="profileRoute()">Profile</button>
+              <a (click)="profileRoute()">Profile</a>
+              <br>
+              <br>
           </span>
         </div>
       </div>
+</div>
+ <md-card class="top">
+    <h1>{{ profile?.fullname }}</h1>
+    aka: {{ profile?.displayName }}
+    <br>  
+    {{ profile?.email }}
+    <br>
+     </md-card>
+     <md-card style="text-align: center">
+   <button md-raised-button style="color: black" style="background: lawngreen" (click)="follow()">Follow</button>
+   <button routerLink="/userfollowers/{{profile?.uid}}" md-raised-button style="color: black" style="background: lawngreen">Followers</button>
+   <button routerLink="/userfollowees/{{profile?.uid}}" md-raised-button style="color: black" style="background: lawngreen">Followees</button>
+     </md-card>
+
+<div class="videos">
+    <h1>{{ profile?.displayName }}'s Activity</h1>
+    <md-card *ngFor="let vote of votes | async">
+      <a href="/user/{{vote.uid}}" style="color: lawngreen"></a><span>{{ profile?.displayName }} gave this video two thumbs up</span>
+      <a href="/videos/{{vote.vid}}" style="color: lawngreen">
+      <div>
+      <h3>{{vote.videoTitle}}</h3>
+      <img style="height: 90px" style="width: 160px" [src]="vote.thumbnail"/>
+      </div>
+      </a>
+    </md-card>
+<md-card *ngFor="let post of posts | async">
+    <a href="/user/{{post.uid}}" style="color: lawngreen"></a><span>{{ profile?.displayName }} gave this video two thumbs up and left a comment</span>
+    <a href="/videos/{{post.vid}}" style="color: lawngreen">
+    <div>
+    <h3>{{post.videoTitle}}</h3>
+    <img style="height: 90px" style="width: 160px" src={{post.thumbnail}}>
+    <p>{{ post.comment }}</p>
     </div>
-<h1>{{ profile?.fullname }}</h1>
-<p>
-  {{ profile?.displayName }}
-  <br>  
-  {{ profile?.email }}
-</p>
-<button (click)="follow()">Follow</button>
 
