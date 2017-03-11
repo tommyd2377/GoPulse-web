@@ -44,6 +44,7 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: 'welcomescreen', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'videos/:id', component: VideoDetailComponent },
   { path: 'user/:id', component: UsersComponent, },
