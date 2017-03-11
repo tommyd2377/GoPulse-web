@@ -28,12 +28,11 @@ import { PrivacyComponent } from './privacy/privacy.component';
 import { AboutComponent } from './about/about.component';
 import { UpdateComponent } from './update/update.component';
 import { ContactComponent } from './contact/contact.component';
+import { UserfollowersComponent } from './userfollowers/userfollowers.component';
+import { UserfolloweesComponent } from './userfollowees/userfollowees.component';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
-import { UserfollowersComponent } from './userfollowers/userfollowers.component';
-import { UserfolloweesComponent } from './userfollowees/userfollowees.component';
-
 
 export const firebaseConfig = {
  apiKey: "AIzaSyAJNsnnVl8HfbViTs5qCNGHs2AzN2BKSTE",
