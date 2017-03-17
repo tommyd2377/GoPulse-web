@@ -30,6 +30,15 @@
  </md-card>
 <div class="videos"> 
 <h1>Your Activity</h1>
+      <md-card *ngFor="let active of activity | async">
+      <a href="/user/{{active.uid}}" style="color: lawngreen"></a><span>You gave this video two thumbs up</span>
+      <a href="/videos/{{active.vid}}" style="color: lawngreen">
+      <div>
+      <h3>{{active.videoTitle}}</h3>
+      <img style="height: 90px" style="width: 160px" [src]="active.thumbnail"/>
+      </div>
+      </a>
+    </md-card>
     <md-card *ngFor="let vote of votes | async">
       <a href="/user/{{vote.uid}}" style="color: lawngreen"></a><span>You gave this video two thumbs up</span>
       <a href="/videos/{{vote.vid}}" style="color: lawngreen">

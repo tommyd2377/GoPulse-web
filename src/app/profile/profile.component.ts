@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
   votes: FirebaseListObservable<any>;
   posts: FirebaseListObservable<any>;
   dms: FirebaseListObservable<any>;
+  activity: FirebaseListObservable<any>;
   displayName;
   
   constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router, 
@@ -37,9 +38,12 @@ export class ProfileComponent implements OnInit {
         var vote_activity = user.uid+"-votes";
         var post_activity = user.uid+"-posts";
         var dm_activity = user.uid+"-dm";
+        var activity = user.uid+"-activity";
         var uid = user.uid;
           
           this.votes = this.af.database.list('user-data/'+vote_activity)
+            .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+          this.activity = this.af.database.list('user-data/'+activity)
             .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
           this.posts = this.af.database.list('user-data/'+post_activity)
             .map((array) => array.reverse()) as FirebaseListObservable<any[]>;

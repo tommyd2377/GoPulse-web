@@ -99,13 +99,23 @@ export class VideoDetailComponent implements OnInit {
           const votes = this.af.database.list("user-data/"+uid_votes)
             votes.push({ uid: (uid), username: (displayName), vid: (this.id),
             videoTitle: (this.title), thumbnail: (this.thumbnail) });
+
+          const activity = this.af.database.list("user-data/"+uid+"-activity")
+            activity.push({ uid: (uid), username: (displayName), vid: (this.id),
+            videoTitle: (this.title), thumbnail: (this.thumbnail) });
           
           this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
             .subscribe(snapshots=>{
               snapshots.forEach(snapshot => {
+                
                 const follower = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-votes")
                 console.log(snapshot.val().follower_uid)
                 follower.push({ uid: (uid), username: (displayName), vid: (this.id),
+                videoTitle: (this.title), thumbnail: (this.thumbnail) });
+
+                const follower_activity = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-activity")
+                console.log(snapshot.val().follower_uid)
+                follower_activity.push({ uid: (uid), username: (displayName), vid: (this.id),
                 videoTitle: (this.title), thumbnail: (this.thumbnail) });
                 });
               })
@@ -146,6 +156,7 @@ export class VideoDetailComponent implements OnInit {
             const dm = this.af.database.list("user-data/"+uid_dms)
             dm.push({ uid: (uid), username: (displayName), vid: (this.id),
             videoTitle: (this.title), thumbnail: (this.thumbnail) });
+            
             const video_dm = this.af.database.list("video-data/"+(this.id)+"-dm")
             video_dm.push({ uid: (uid), username: (displayName), vid: (this.id),
             videoTitle: (this.title), thumbnail: (this.thumbnail) });
@@ -156,6 +167,11 @@ export class VideoDetailComponent implements OnInit {
                                         
                 const follower = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-dm")
                 follower.push({ uid: (uid), username: (displayName), vid: (this.id),
+                videoTitle: (this.title), thumbnail: (this.thumbnail) });
+
+                const follower_activity = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-activity")
+                console.log(snapshot.val().follower_uid)
+                follower_activity.push({ uid: (uid), username: (displayName), vid: (this.id),
                 videoTitle: (this.title), thumbnail: (this.thumbnail) });
                 
                 });
@@ -195,6 +211,11 @@ export class VideoDetailComponent implements OnInit {
               const posts = this.af.database.list("user-data/"+uid_posts)
               posts.push({ uid: (uid), username: (displayName), vid: (this.id),
               videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
+
+              const activity = this.af.database.list("user-data/"+uid+"-activity")
+              activity.push({ uid: (uid), username: (displayName), vid: (this.id),
+              videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
+              
               const video_post = this.af.database.list("video-data/"+(this.id)+"-posts")
               video_post.push({ uid: (uid), username: (displayName), vid: (this.id),
               videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
@@ -202,10 +223,16 @@ export class VideoDetailComponent implements OnInit {
                 this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
                   .subscribe(snapshots=>{
                     snapshots.forEach(snapshot => {
+                      
                       console.log(snapshot.val().follower_uid)
                       const follower = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-posts")
                       follower.push({ uid: (uid), username: (displayName), vid: (this.id),
                       videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
+
+                      const follower_activity = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-activity")
+                      console.log(snapshot.val().follower_uid)
+                      follower_activity.push({ uid: (uid), username: (displayName), vid: (this.id),
+                      videoTitle: (this.title), thumbnail: (this.thumbnail) });
                     });
                     })
             });
