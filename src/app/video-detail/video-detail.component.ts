@@ -44,31 +44,34 @@ export class VideoDetailComponent implements OnInit {
         
       this.route.params
         .map(params => params['id'])
-        
-        .subscribe((id) => {
-          this.youtube.getVideo(id)
           
-        .subscribe(video => { 
-          this.id = video.items[0].id;
-          this.url = sanitizer.bypassSecurityTrustResourceUrl
-          ("https://www.youtube.com/embed/"+this.id+"?autoplay=1");
-        })
-      }) 
-  }
+          .subscribe((id) => {
+            this.youtube.getVideo(id)
+              .subscribe(video => { 
+                
+                this.id = video.items[0].id;
+                this.url = sanitizer.bypassSecurityTrustResourceUrl
+                ("https://www.youtube.com/embed/"+this.id+"?autoplay=1");
+              
+              })
+          }) 
+    }
 
   ngOnInit() {
     
     this.route.params
       .map(params => params['id'])
+        
         .subscribe((id) => {
-          
           this.youtube.getVideo(id)
             .subscribe(video => {
+              
               this.title = video.items[0].snippet.title;
               this.description = video.items[0].snippet.description;  
               this.id = video.items[0].id;
               this.comments = this.af.database.list("video-data/"+(this.id)+"-posts")
               .map((array) => array.reverse()) as FirebaseListObservable<any[]>; 
+            
             })
         }) 
   }
