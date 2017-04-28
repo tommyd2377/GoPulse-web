@@ -14,7 +14,7 @@ export class TomrankService {
     return this.af.database.list("user-data/"+queryChild(uid, votes));
   }
   
-  tomRank(uid: String) {
+  tomRank(uid: Number) {
 
 
      this.af.database.list('video-data/', { preserveSnapshot: true})

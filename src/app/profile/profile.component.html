@@ -31,28 +31,13 @@
 <div class="videos"> 
 <h1>Your Activity</h1>
       <md-card *ngFor="let active of activity | async">
-      <a href="/user/{{active.uid}}" style="color: lawngreen"></a><span>You gave this video two thumbs up</span>
+      <a href="/user/{{active.uid}}" style="color: lawngreen"></a><span *ngIf="active.videoTitle">You gave this video two thumbs up</span><span *ngIf="active.comment"> and left a comment</span>
       <a href="/videos/{{active.vid}}" style="color: lawngreen">
       <div>
       <h3>{{active.videoTitle}}</h3>
-      <img style="height: 90px" style="width: 160px" [src]="active.thumbnail"/>
+      <img *ngIf="active.thumbnail" style="height: 90px" style="width: 160px" [src]="active.thumbnail"/>
+      <p>{{active.comment}}</p>
+      <p *ngIf="active.follower_username">{{active.follower_username}} started following {{active.followee_username}}</p>
       </div>
       </a>
     </md-card>
-    <md-card *ngFor="let vote of votes | async">
-      <a href="/user/{{vote.uid}}" style="color: lawngreen"></a><span>You gave this video two thumbs up</span>
-      <a href="/videos/{{vote.vid}}" style="color: lawngreen">
-      <div>
-      <h3>{{vote.videoTitle}}</h3>
-      <img style="height: 90px" style="width: 160px" [src]="vote.thumbnail"/>
-      </div>
-      </a>
-    </md-card>
-<md-card *ngFor="let post of posts | async">
-    <a href="/user/{{post.uid}}" style="color: lawngreen"></a><span>You gave this video two thumbs up and left a comment</span>
-    <a href="/videos/{{post.vid}}" style="color: lawngreen">
-    <div>
-    <h3>{{post.videoTitle}}</h3>
-    <img style="height: 90px" style="width: 160px" src={{post.thumbnail}}>
-    <p>{{ post.comment }}</p>
-    </div>

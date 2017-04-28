@@ -97,6 +97,7 @@ const appRoutes: Routes = [
     UserfollowersComponent,
     UserfolloweesComponent
   ],
+  
   imports: [
     BrowserModule,
     FormsModule,
@@ -106,8 +107,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MaterialModule.forRoot()
   ],
+  
   providers: [YoutubeService, UserService],
   bootstrap: [AppComponent]
+
 })
 
 export class AppModule {}

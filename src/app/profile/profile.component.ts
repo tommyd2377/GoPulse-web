@@ -23,11 +23,12 @@ import { RouterModule,
 
 export class ProfileComponent implements OnInit {
 
-  votes: FirebaseListObservable<any>;
-  posts: FirebaseListObservable<any>;
-  dms: FirebaseListObservable<any>;
   activity: FirebaseListObservable<any>;
-  displayName;
+  displayName;  
+
+  // votes: FirebaseListObservable<any>;
+  // posts: FirebaseListObservable<any>;
+  // dms: FirebaseListObservable<any>;
   
   constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router, 
     private user: UserService) {}
@@ -35,21 +36,24 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.af.auth.subscribe( (user) => {
         if (user) {
-        var vote_activity = user.uid+"-votes";
-        var post_activity = user.uid+"-posts";
-        var dm_activity = user.uid+"-dm";
-        var activity = user.uid+"-activity";
-        var uid = user.uid;
+          var uid = user.uid;
+          var activity = uid+"-activity";
           
-          this.votes = this.af.database.list('user-data/'+vote_activity)
-            .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+          // var vote_activity = user.uid+"-votes";
+          // var post_activity = user.uid+"-posts";
+          // var dm_activity = user.uid+"-dm";
+          
           this.activity = this.af.database.list('user-data/'+activity)
             .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
-          this.posts = this.af.database.list('user-data/'+post_activity)
-            .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
-          this.dms = this.af.database.list('user-data/'+dm_activity)
-            .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
-              var uid = user.uid;
+          
+          // this.votes = this.af.database.list('user-data/'+vote_activity)
+          //  .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+          // this.posts = this.af.database.list('user-data/'+post_activity)
+          //  .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+          // this.dms = this.af.database.list('user-data/'+dm_activity)
+          //  .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+          
+          var uid = user.uid;
               
           this.user.fetch_user_data(uid)
             .subscribe(user => {
@@ -59,10 +63,10 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-      signOut() {
-        this.af.auth.logout();
-        this.router.navigate(['/welcomescreen'])
-    }
+  signOut() {
+    this.af.auth.logout();
+    this.router.navigate(['/welcomescreen'])
+  }
 
   scrollTop() {
     window.scrollTo(0, 0);
@@ -91,6 +95,5 @@ export class ProfileComponent implements OnInit {
   followees() {
     this.router.navigate(['/followees'])
   }
-
 
 }

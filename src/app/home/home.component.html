@@ -24,34 +24,14 @@
 <p>Inviting a handful of friends or family to signup and follow each other will create an engaging experience very quickly.</p>
 </div>
 <h1>Activity</h1>
-    <md-card *ngFor="let vote of votes | async">
-      <a href="/user/{{vote.uid}}" style="color: lawngreen"><span>{{vote.username}}</span></a><span> gave this video two thumbs up</span>
-      <a href="/videos/{{vote.vid}}" style="color: lawngreen">
+  <md-card *ngFor="let active of activity | async">
+      <a href="/user/{{active.uid}}" style="color: lawngreen">{{active.username}}</a><span>gave this video two thumbs up</span>
+      <a href="/videos/{{active.vid}}" style="color: lawngreen">
       <div>
-      <h3>{{vote.videoTitle}}</h3>
-      <img style="height: 90px" style="width: 160px" [src]="vote.thumbnail"/>
+      <h3>{{active.videoTitle}}</h3>
+      <img style="height: 90px" style="width: 160px" [src]="active.thumbnail"/>
+      <p>{{active.comment}}</p>
       </div>
       </a>
     </md-card>
-
-<md-card *ngFor="let post of posts | async">
-    <a href="/user/{{post.uid}}" style="color: lawngreen"><span>{{post.username}}</span></a><span> gave this video two thumbs up and left a comment</span>
-    <a href="/videos/{{post.vid}}" style="color: lawngreen">
-    <div>
-    <h3>{{post.videoTitle}}</h3>
-    <img style="height: 90px" style="width: 160px" src={{post.thumbnail}}>
-    <p> {{ post.comment }} </p>
-    </div>
-    </a>
-</md-card>
-
-<md-card *ngFor="let dm of dms | async">
-    <a href="/user/{{dm.uid}}" style="text-decoration: none"><span>{{dm.username}}</span></a><span> sent you this video to watch</span>
-    <a href="/videos/{{dm.vid}}" style="text-decoration: none">
-    <div>
-    <h3>{{dm.videoTitle}}</h3>
-    <img src={{dm.thumbnail}}>
-    </div>
-    </a>
-</md-card>
  </div>

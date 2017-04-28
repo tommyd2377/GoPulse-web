@@ -22,6 +22,6 @@
 </md-card>
 <md-card *ngFor="let followee of followees | async">
     <a href="/user/{{followee.followee_uid}}">
-    <h3>{{followee.followee_uid}}</h3>
+    <h3>{{followee.followee_username}}</h3>
     </a>
 </md-card>

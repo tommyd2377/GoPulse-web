@@ -18,12 +18,14 @@ import 'rxjs/add/operator/switchMap';
 })
 
 export class UsersComponent implements OnInit {
-  
-  votes: FirebaseListObservable<any>;
-  posts: FirebaseListObservable<any>;
-  dms: FirebaseListObservable<any>;
+
+  activity: FirebaseListObservable<any>;
   name;
   profile;
+  
+  // votes: FirebaseListObservable<any>;
+  // posts: FirebaseListObservable<any>;
+  // dms: FirebaseListObservable<any>;
 
   constructor(private af: AngularFire, private Auth: FirebaseAuth, 
     private route: ActivatedRoute, private router: Router, private users: UserService) {}
@@ -34,21 +36,27 @@ export class UsersComponent implements OnInit {
       .map(params => params['id'])
         .subscribe((id) => {
           
-          var vote_activity = id+"-votes";
-          var post_activity = id+"-posts";
-          var dm_activity = id+"-dm";
+          var activity = id+"-activity";
+          
+          // var vote_activity = id+"-votes";
+          // var post_activity = id+"-posts";
+          // var dm_activity = id+"-dm";
 
-          this.votes = this.af.database.list('user-data/'+vote_activity)
+          this.activity = this.af.database.list('user-data/'+activity)
             .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
-          this.posts = this.af.database.list('user-data/'+post_activity)
-            .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
-          this.dms = this.af.database.list('user-data/'+dm_activity)
-            .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+
+          // this.votes = this.af.database.list('user-data/'+vote_activity)
+          //  .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+          // this.posts = this.af.database.list('user-data/'+post_activity)
+          //  .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+          // this.dms = this.af.database.list('user-data/'+dm_activity)
+          //  .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
     
-    this.users.fetch_user_data(id)
-        .subscribe(user => {
-          this.profile = user;
-        })
+          this.users.fetch_user_data(id)
+              .subscribe(user => {
+                this.profile = user;
+              })
+        
         }) 
   }
 
@@ -56,10 +64,10 @@ export class UsersComponent implements OnInit {
       
       this.af.auth.subscribe( (user) => {
         if (user) {
-          var uid_followees = user.uid+"-followees";
           var uid = user.uid;
+          var uid_followees = uid+"-followees";
           var displayName = user.auth.displayName;
-          console.log(user)
+     
             
       this.route.params
         .map(params => params['id'])
@@ -72,16 +80,20 @@ export class UsersComponent implements OnInit {
                 
           .subscribe(otheruser => {
             this.name = (otheruser)
+              const activity1 = this.af.database.list("user-data/"+uid+"-activity")
+              activity1.push({ followee_uid: (id), followee_username: (this.profile.displayName), follower_username: (displayName), follower_uid: (uid) });
               const followees = this.af.database.list("user-data/"+uid_followees)
-              followees.push({ followee_uid: (id), followee_username: (''), follower_username: (displayName), follower_uid: (uid) });
+              followees.push({ followee_uid: (id), followee_username: (this.profile.displayName), follower_username: (displayName), follower_uid: (uid) });
               const follower = this.af.database.list("user-data/"+id+"-followers")
-              follower.push({ followee_uid: (id), followee_username: (id), follower_username: (displayName), follower_uid: (uid) });
+              follower.push({ followee_uid: (id), followee_username: (this.profile.displayName), follower_username: (displayName), follower_uid: (uid) });
+              const activity2= this.af.database.list("user-data/"+id+"-activity")
+              activity2.push({ followee_uid: (id), followee_username: (this.profile.displayName), follower_username: (displayName), follower_uid: (uid) });
             
             this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
               .subscribe(snapshots=>{
                 snapshots.forEach(snapshot => {
                   const followers = this.af.database.list("user-data/"+id+"-following-activity")
-                  followers.push({ follower: (id), cu_username: ("username"), ou_username: ("username"), followee: (uid) });
+                  followers.push({ follower_uid: (id), follower_username: (this.profile.displayName), followee_username: (displayName), followee_uid: (uid) });
                 })
               });
               })
@@ -91,7 +103,7 @@ export class UsersComponent implements OnInit {
         });
       } 
 
-   scrollTop() {
+  scrollTop() {
     window.scrollTo(0, 0);
   }
 

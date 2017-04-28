@@ -24,42 +24,45 @@ import { RouterModule,
 
 export class HomeComponent implements OnInit {
   
-  votes: FirebaseListObservable<any>;
-  posts: FirebaseListObservable<any>;
-  dms: FirebaseListObservable<any>;
-  following: FirebaseListObservable<any>;
-  combinedlist: Observable<any>;
-
+  activity: FirebaseListObservable<any>;
   
-  constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router) {}
+  // votes: FirebaseListObservable<any>;
+  // posts: FirebaseListObservable<any>;
+  // dms: FirebaseListObservable<any>;
+  // following: FirebaseListObservable<any>;
 
-  //TODO: combine latest fom votes, posts, and following activty
-  //TODO: post dms at top
+  constructor(private af: AngularFire, private Auth: FirebaseAuth, private router: Router) {}
   
   ngOnInit() {
     this.af.auth.subscribe( (user) => {
       if (user) {
-        var vote_activity = user.uid+"-followee-votes";
-        var post_activity = user.uid+"-followee-posts";
-        var dm_activity = user.uid+"-followee-dm";
-        var following_activity = user.uid+"-following-activity";
         var uid = user.uid;
+        var activity = uid+"-followee-activity";
+        
+        // var vote_activity = uid+"-followee-votes";
+        // var post_activity = uid+"-followee-posts";
+        // var dm_activity = uid+"-followee-dm";
+        // var following_activity = uid+"-following-activity";
       
-      this.votes = this.af.database.list('user-data/'+vote_activity)
-        .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
-      this.following = this.af.database.list('user-data/'+following_activity)
-        .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
-      this.posts = this.af.database.list('user-data/'+post_activity)
-        .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
-      this.dms = this.af.database.list('user-data/'+dm_activity)
-        .map((array) => array.reverse()) as FirebaseListObservable<any[]>;  
+        this.activity = this.af.database.list('user-data/'+activity)
+          .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+        
+        // this.votes = this.af.database.list('user-data/'+vote_activity)
+        //  .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+        // this.following = this.af.database.list('user-data/'+following_activity)
+        //  .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+        // this.posts = this.af.database.list('user-data/'+post_activity)
+        //  .map((array) => array.reverse()) as FirebaseListObservable<any[]>;
+        // this.dms = this.af.database.list('user-data/'+dm_activity)
+        // .map((array) => array.reverse()) as FirebaseListObservable<any[]>;  
+      
       } 
       
       else {
         this.router.navigate(['/welcomescreen'])
       }
     
-  });
+    });
   }
 
   scrollTop() {

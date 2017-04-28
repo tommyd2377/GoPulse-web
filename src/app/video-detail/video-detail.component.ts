@@ -99,9 +99,9 @@ export class VideoDetailComponent implements OnInit {
             video_votes.push({ uid: (uid), username: (displayName), vid: (this.id),
             videoTitle: (this.title), thumbnail: (this.thumbnail) });
           
-          const votes = this.af.database.list("user-data/"+uid_votes)
-            votes.push({ uid: (uid), username: (displayName), vid: (this.id),
-            videoTitle: (this.title), thumbnail: (this.thumbnail) });
+         // const votes = this.af.database.list("user-data/"+uid_votes)
+          //  votes.push({ uid: (uid), username: (displayName), vid: (this.id),
+          //  videoTitle: (this.title), thumbnail: (this.thumbnail) });
 
           const activity = this.af.database.list("user-data/"+uid+"-activity")
             activity.push({ uid: (uid), username: (displayName), vid: (this.id),
@@ -111,10 +111,10 @@ export class VideoDetailComponent implements OnInit {
             .subscribe(snapshots=>{
               snapshots.forEach(snapshot => {
                 
-                const follower = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-votes")
-                console.log(snapshot.val().follower_uid)
-                follower.push({ uid: (uid), username: (displayName), vid: (this.id),
-                videoTitle: (this.title), thumbnail: (this.thumbnail) });
+              //  const follower = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-votes")
+              //  console.log(snapshot.val().follower_uid)
+              //  follower.push({ uid: (uid), username: (displayName), vid: (this.id),
+              //  videoTitle: (this.title), thumbnail: (this.thumbnail) });
 
                 const follower_activity = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-activity")
                 console.log(snapshot.val().follower_uid)
@@ -211,9 +211,9 @@ export class VideoDetailComponent implements OnInit {
               this.id= video.items[0].id;
               this.thumbnail = video.items[0].snippet.thumbnails.high.url;
                             
-              const posts = this.af.database.list("user-data/"+uid_posts)
-              posts.push({ uid: (uid), username: (displayName), vid: (this.id),
-              videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
+            //  const posts = this.af.database.list("user-data/"+uid_posts)
+            //  posts.push({ uid: (uid), username: (displayName), vid: (this.id),
+            //  videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
 
               const activity = this.af.database.list("user-data/"+uid+"-activity")
               activity.push({ uid: (uid), username: (displayName), vid: (this.id),
@@ -227,15 +227,15 @@ export class VideoDetailComponent implements OnInit {
                   .subscribe(snapshots=>{
                     snapshots.forEach(snapshot => {
                       
-                      console.log(snapshot.val().follower_uid)
-                      const follower = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-posts")
-                      follower.push({ uid: (uid), username: (displayName), vid: (this.id),
-                      videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
+                    //  console.log(snapshot.val().follower_uid)
+                    //  const follower = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-posts")
+                    //  follower.push({ uid: (uid), username: (displayName), vid: (this.id),
+                    //  videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
 
                       const follower_activity = this.af.database.list("user-data/"+(snapshot.val().follower_uid)+"-followee-activity")
                       console.log(snapshot.val().follower_uid)
                       follower_activity.push({ uid: (uid), username: (displayName), vid: (this.id),
-                      videoTitle: (this.title), thumbnail: (this.thumbnail) });
+                      videoTitle: (this.title), thumbnail: (this.thumbnail), comment: (this.comment) });
                     });
                     })
             });
