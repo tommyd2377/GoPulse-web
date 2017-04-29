@@ -24,6 +24,8 @@ import { RouterModule,
 export class ProfileComponent implements OnInit {
 
   activity: FirebaseListObservable<any>;
+  followercount: FirebaseListObservable<any>;
+  followeecount: FirebaseListObservable<any>;
   displayName;  
 
   // votes: FirebaseListObservable<any>;
@@ -42,6 +44,9 @@ export class ProfileComponent implements OnInit {
           // var vote_activity = user.uid+"-votes";
           // var post_activity = user.uid+"-posts";
           // var dm_activity = user.uid+"-dm";
+
+          this.followercount = this.af.database.list("user-data/"+(uid)+"-folowers");
+          this.followeecount = this.af.database.list("user-data/"+(uid)+"-folowees");
           
           this.activity = this.af.database.list('user-data/'+activity)
             .map((array) => array.reverse()) as FirebaseListObservable<any[]>;

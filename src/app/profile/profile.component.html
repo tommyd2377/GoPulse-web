@@ -24,9 +24,12 @@
     {{ displayName?.email }}
  </md-card>
  <md-card style="text-align: center">
-<button md-raised-button style="color: black" style="background: lawngreen" (click)="signOut()">Log Out</button>
 <button md-raised-button style="color: black" style="background: lawngreen" (click)="followers()">Followers</button>
+<p style="color: lawngreen">Followers: {{ (followercount | async)?.length }}</p>
 <button md-raised-button style="color: black" style="background: lawngreen" (click)="followees()">Followees</button>
+<p style="color: lawngreen">Followees: {{ (followeecount | async)?.length }}</p>
+<button md-raised-button style="color: black" style="background: lawngreen" (click)="signOut()">Log Out</button>
+<br>
  </md-card>
 <div class="videos"> 
 <h1>Your Activity</h1>

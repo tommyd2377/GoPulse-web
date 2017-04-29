@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TomrankService } from '../tomrank.service';
 import {defaultFirebase,
   AngularFire,
   AuthMethods,
@@ -23,14 +22,13 @@ import { RouterModule,
 
 export class PopularComponent implements OnInit {
 
-  constructor(private router: Router, private tomRank: TomrankService) { }
+  constructor(private router: Router) { }
 
   //TODO: return video-data
   //TODO: rank and display videos by list size at video-data/id/-votes
 
   ngOnInit() {
     
-  this.tomRank.tomRank(7007);
   
 }
 

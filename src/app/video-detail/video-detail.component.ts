@@ -25,10 +25,12 @@ export class VideoDetailComponent implements OnInit {
   posts: FirebaseListObservable<any[]>;
   dm: FirebaseListObservable<any[]>;
   followers: FirebaseListObservable<any[]>;
-  video_votes: FirebaseListObservable<any[]>;
+  videovotes: FirebaseListObservable<any[]>;
   video_dm: FirebaseListObservable<any[]>;
   video_post: FirebaseListObservable<any[]>;
   url: SafeResourceUrl;
+  postcount: FirebaseListObservable<any[]>;
+  votecount: FirebaseListObservable<any[]>;
   video;
   title;
   description;
@@ -52,6 +54,9 @@ export class VideoDetailComponent implements OnInit {
                 this.id = video.items[0].id;
                 this.url = sanitizer.bypassSecurityTrustResourceUrl
                 ("https://www.youtube.com/embed/"+this.id+"?autoplay=1");
+
+                this.postcount= this.af.database.list("video-data/"+(this.id)+"-posts");
+                this.votecount= this.af.database.list("video-data/"+(this.id)+"-votes");
               
               })
           }) 
@@ -95,8 +100,8 @@ export class VideoDetailComponent implements OnInit {
           this.id= video.items[0].id;
           this.thumbnail = video.items[0].snippet.thumbnails.high.url;
           
-          const video_votes = this.af.database.list("video-data/"+(this.id)+"-votes")
-            video_votes.push({ uid: (uid), username: (displayName), vid: (this.id),
+          const videovotes = this.af.database.list("video-data/"+(this.id)+"-votes")
+            videovotes.push({ uid: (uid), username: (displayName), vid: (this.id),
             videoTitle: (this.title), thumbnail: (this.thumbnail) });
           
          // const votes = this.af.database.list("user-data/"+uid_votes)

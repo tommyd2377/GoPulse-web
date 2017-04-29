@@ -75,8 +75,9 @@ export class TomrankService {
         var matrix_a1 = matrix_a[i];
         for(var j = 1; j < matrix_a.length; j++) {
             console.log("cube[" + i + "][" + j + "] = " + matrix_a1[j]);
-              if (matrix_a1[j] === user_vids) {
+           //   if (matrix_a1[j] === user_vids) {
                 
+        }
         }
     
     //loop through user_vids and print uids
@@ -95,9 +96,6 @@ export class TomrankService {
     //current_user => other_user post on voted video == vote_intersection + all votes x2
     //current_user => followee_dm == vote_intersection + all votes x4
     //current_user =>
-    
   }
-
 }
-
-
+}

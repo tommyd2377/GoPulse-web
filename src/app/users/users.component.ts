@@ -20,6 +20,8 @@ import 'rxjs/add/operator/switchMap';
 export class UsersComponent implements OnInit {
 
   activity: FirebaseListObservable<any>;
+  followercount: FirebaseListObservable<any>;
+  followeecount: FirebaseListObservable<any>;
   name;
   profile;
   
@@ -37,6 +39,9 @@ export class UsersComponent implements OnInit {
         .subscribe((id) => {
           
           var activity = id+"-activity";
+
+          this.followercount = this.af.database.list("user-data/"+(id)+"-followers");
+          this.followeecount = this.af.database.list("user-data/"+(id)+"-followees");
           
           // var vote_activity = id+"-votes";
           // var post_activity = id+"-posts";

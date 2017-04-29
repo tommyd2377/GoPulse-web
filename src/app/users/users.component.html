@@ -26,19 +26,24 @@
      </md-card>
      <md-card style="text-align: center">
    <button md-raised-button style="color: black" style="background: lawngreen" (click)="follow()">Follow</button>
+   <br>
+   <br>
    <button routerLink="/userfollowers/{{profile?.uid}}" md-raised-button style="color: black" style="background: lawngreen">Followers</button>
+   <p style="color: lawngreen">Followers: {{ (followercount | async)?.length }}</p>
    <button routerLink="/userfollowees/{{profile?.uid}}" md-raised-button style="color: black" style="background: lawngreen">Followees</button>
+   <p style="color: lawngreen">Followees: {{ (followeecount | async)?.length }}</p>
      </md-card>
 
 <div class="videos">
     <h1>{{ profile?.displayName }}'s Activity</h1>
     <md-card *ngFor="let active of activity | async">
-      <a href="/user/{{active.uid}}" style="color: lawngreen"></a><span>{{ profile?.displayName }} gave this video two thumbs up</span>
+      <a href="/user/{{active.uid}}" style="color: lawngreen"></a><span *ngIf="active.vid">{{ profile?.displayName }} gave this video two thumbs up</span>
       <a href="/videos/{{active.vid}}" style="color: lawngreen">
       <div>
       <h3>{{active.videoTitle}}</h3>
-      <img style="height: 90px" style="width: 160px" [src]="active.thumbnail"/>
+      <img *ngIf="active.thumbnail" style="height: 90px" style="width: 160px" [src]="active.thumbnail"/>
       <p>{{active.comment}}</p>
+      <p *ngIf="active.follower_username"><a href="/user/{{active.follower_uid}}">{{active.follower_username}}</a> started following You</p>
       </div>
       </a>
     </md-card>
