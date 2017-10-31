@@ -64,6 +64,7 @@ export class VideoDetailComponent implements OnInit {
 
   ngOnInit() {
     
+    //grab youtube video meta-data from user selection for display
     this.route.params
       .map(params => params['id'])
         
@@ -82,13 +83,15 @@ export class VideoDetailComponent implements OnInit {
   }
   
   twoThumbsUp() { 
-  
+    
+    //grab current user-data for database storage
     this.af.auth.subscribe( (user) => {
       if (user) {
         var uid_votes = user.uid+"-votes";
         var uid = user.uid;
         var displayName = user.auth.displayName;
         
+        //grab youtube video meta-data from user selection for database storage
         this.route.params
         .map(params => params['id'])
         
@@ -100,18 +103,21 @@ export class VideoDetailComponent implements OnInit {
           this.id= video.items[0].id;
           this.thumbnail = video.items[0].snippet.thumbnails.high.url;
           
+          //push data to database at ('video-data')
           const videovotes = this.af.database.list("video-data/"+(this.id)+"-votes")
             videovotes.push({ uid: (uid), username: (displayName), vid: (this.id),
             videoTitle: (this.title), thumbnail: (this.thumbnail) });
           
-         // const votes = this.af.database.list("user-data/"+uid_votes)
+          // const votes = this.af.database.list("user-data/"+uid_votes)
           //  votes.push({ uid: (uid), username: (displayName), vid: (this.id),
           //  videoTitle: (this.title), thumbnail: (this.thumbnail) });
-
+          
+          //push data to database at ('user-data')
           const activity = this.af.database.list("user-data/"+uid+"-activity")
             activity.push({ uid: (uid), username: (displayName), vid: (this.id),
             videoTitle: (this.title), thumbnail: (this.thumbnail) });
           
+          //loop through current user followers and push data to each follower
           this.af.database.list('user-data/'+uid+'-followers', { preserveSnapshot: true})
             .subscribe(snapshots=>{
               snapshots.forEach(snapshot => {
